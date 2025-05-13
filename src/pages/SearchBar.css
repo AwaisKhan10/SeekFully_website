@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid red;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 300px;
+  }
+  
+  .search-input {
+    border: none;
+    padding: 12px;
+    width: 100%;
+    outline: none;
+    color: #cccccc;
+  }
+  
+  .search-button {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .circle {
+    background-color: red;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid white;
+  }
+  
