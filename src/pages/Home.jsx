@@ -12,6 +12,8 @@ import hh7 from "../assets/hh4.png";
 import hh8 from "../assets/hh4.png";
 import { Link } from "react-router-dom";
 
+// hiiii
+
 const templateImages = [h1, h2, h3, h4, h5];
 const recentImages = [hh4, hh5, hh6, hh7, hh8];
 
