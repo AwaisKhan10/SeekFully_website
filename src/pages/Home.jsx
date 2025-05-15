@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../Component/SideBar";
 import h1 from "../assets/h1.png";
 import h2 from "../assets/h2.png";
@@ -21,12 +21,13 @@ const colors = ["#b91c1c", "#facc15", "#4ade80", "#60a5fa", "#a78bfa"];
 const Home = () => {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex font-montserrat">
+    <div className="flex">
       <Sidebar />
 
-      <div className="flex-1 ml-[160px] p-6 bg-white min-h-screen rounded-xl shadow-xl font-montserrat">
+      <div className="flex-1 ml-[160px] p-6 bg-white min-h-screen rounded-xl shadow-xl">
         {/* Header */}
         <header className="relative px-4 py-6 sm:px-8">
           {/* Login and Register Buttons */}
@@ -43,9 +44,9 @@ const Home = () => {
             </Link>
           </div>
 
-          {/* Centered Navigation */}
-          <nav className="flex justify-center mt-8">
-            <ul className="flex space-x-6  font-semibold text-lg">
+          {/* Navigation */}
+          <nav className="flex justify-center mt-14 sm:mt-16">
+            <ul className="flex space-x-6 font-semibold text-lg">
               <Link to="/">
                 <li className="text-red-600 border-b-2 border-red-600 pb-1 cursor-pointer">
                   Mapping
@@ -110,16 +111,13 @@ const Home = () => {
           </div>
         </header>
 
-        {/* Templates Section */}
+        {/* Templates */}
         <section className="mt-10">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold">Templets</h2>
-            <Link to="/templets">
-              <button className="text-black font-medium">View All</button>
-            </Link>
+            <button className="text-black font-medium">View All</button>
           </div>
-
-          <div className="grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             {templateImages.map((src, idx) => {
               const borderColors = [
                 "border-red-700",
@@ -128,7 +126,6 @@ const Home = () => {
                 "border-[rgba(205,153,142,1)]",
                 "border-[rgba(142,140,125,1)]",
               ];
-
               const headerBgColors = [
                 "bg-red-700",
                 "bg-slate-700",
@@ -136,7 +133,6 @@ const Home = () => {
                 "bg-[rgba(205,153,142,1)]",
                 "bg-[rgba(142,140,125,1)]",
               ];
-
               return (
                 <div
                   key={idx}
@@ -164,6 +160,7 @@ const Home = () => {
           </div>
         </section>
 
+        {/* Recent */}
         <section className="mt-12">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold">Recents</h2>
@@ -171,8 +168,7 @@ const Home = () => {
               <button className="text-black font-medium">View All</button>
             </Link>
           </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             {recentImages.map((src, idx) => (
               <div
                 key={idx}

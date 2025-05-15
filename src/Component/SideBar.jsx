@@ -18,7 +18,7 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="w-[80px] sm:w-[100px] md:w-[120px] lg:w-[150px] h-screen bg-white shadow-md flex flex-col items-center py-6 fixed font-montserrat">
+    <div className="w-[80px] sm:w-[100px] md:w-[120px] lg:w-[150px] h-screen bg-white shadow-md flex flex-col items-center py-6 fixed">
       {/* Create Button */}
       <Link to="/tool">
         <div className="flex flex-col items-center text-center mb-8">
