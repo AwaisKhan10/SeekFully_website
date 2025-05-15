@@ -15,35 +15,35 @@ function Bookmark() {
       bookmarkName: "John 3:16 NIV",
       date: "20th August 2024 10:24 AM",
     },
-       {
+    {
       title: "You Bookmarked",
       name: "John 3:16",
       bookmark: "16 For God so loved the world, that he gave his only Son....",
       bookmarkName: "John 3:16 NIV",
       date: "20th August 2024 10:24 AM",
     },
-       {
+    {
       title: "You Bookmarked",
       name: "John 3:16",
       bookmark: "16 For God so loved the world, that he gave his only Son....",
       bookmarkName: "John 3:16 NIV",
       date: "20th August 2024 10:24 AM",
     },
-       {
+    {
       title: "You Bookmarked",
       name: "John 3:16",
       bookmark: "16 For God so loved the world, that he gave his only Son....",
       bookmarkName: "John 3:16 NIV",
       date: "20th August 2024 10:24 AM",
     },
-        {
+    {
       title: "You Bookmarked",
       name: "John 3:16",
       bookmark: "16 For God so loved the world, that he gave his only Son....",
       bookmarkName: "John 3:16 NIV",
       date: "20th August 2024 10:24 AM",
     },
-        {
+    {
       title: "You Bookmarked",
       name: "John 3:16",
       bookmark: "16 For God so loved the world, that he gave his only Son....",
@@ -54,7 +54,7 @@ function Bookmark() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-white">
       {/* Sidebar */}
       <div className="w-64">
         <Sidebar />
