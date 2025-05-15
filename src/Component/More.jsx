@@ -6,7 +6,7 @@ export default function More() {
   const [noteText, setNoteText] = useState("");
 
   return (
-    <div className="flex h-screen w-full">
+    <div className="flex h-screen w-full font-montserrat">
       {/* Sidebar - 20% */}
       <div className="w-1/5 bg-white border-r shadow-sm">
         <Sidebar />
@@ -29,9 +29,12 @@ export default function More() {
 
         {/* Bible Verse Block */}
         <div className="bg-gray-100 rounded-md p-3 mb-4">
-          <p className="font-bold text-sm text-gray-800 mb-1">Galatians 5 22-24</p>
+          <p className="font-bold text-sm text-gray-800 mb-1">
+            Galatians 5 22-24
+          </p>
           <p className="text-sm text-gray-700">
-            But the fruit of the Spirit is love, joy, peace, forbearance, kindness,
+            But the fruit of the Spirit is love, joy, peace, forbearance,
+            kindness,
           </p>
         </div>
 

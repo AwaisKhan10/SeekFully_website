@@ -1,23 +1,39 @@
-import React, { useState } from 'react';
-import logo from '../assets/logo2.png';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import logo from "../assets/logo2.png";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const CreateAccount = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white px-4">
+    <div className="min-h-screen flex items-center justify-center bg-white px-4 font-montserrat">
       <div className="w-full max-w-md text-center">
-        <img src={logo} alt="SeekFully logo" className="mx-auto mb-16 w-[200px] h-[60px]" />
-        <h2 className="text-4xl font-semibold text-black mb-6">Create an account</h2>
+        <img
+          src={logo}
+          alt="SeekFully logo"
+          className="mx-auto mb-16 w-[200px] h-[60px]"
+        />
+        <h2 className="text-4xl font-semibold text-black mb-6">
+          Create an account
+        </h2>
 
         <button className="flex items-center justify-center w-[300px] h-[40px] border border-gray-300 rounded-md py-2 mb-4 hover:shadow-sm mx-auto">
-  <span className="text-sm font-medium text-gray-700">Create account with Google</span>
-  <img src="https://www.google.com/favicon.ico" alt="Google" className="w-5 h-5 ms-2" />
-</button>
-
+          <span className="text-sm font-medium text-gray-700">
+            Create account with Google
+          </span>
+          <img
+            src="https://www.google.com/favicon.ico"
+            alt="Google"
+            className="w-5 h-5 ms-2"
+          />
+        </button>
 
         <div className="flex items-center justify-center my-4">
           <div className="w-24 h-0.5 bg-gray-300" />
@@ -27,7 +43,9 @@ const CreateAccount = () => {
 
         <form className="space-y-4 text-left">
           <div>
-            <label className="text-base text-gray-500 font-medium">Email Address</label>
+            <label className="text-base text-gray-500 font-medium">
+              Email Address
+            </label>
             <input
               type="email"
               placeholder="Enter your email address"
@@ -36,7 +54,9 @@ const CreateAccount = () => {
             />
           </div>
           <div>
-            <label className="text-base text-gray-500 font-medium">Full Name</label>
+            <label className="text-base text-gray-500 font-medium">
+              Full Name
+            </label>
             <input
               type="text"
               placeholder="Enter your full name"
@@ -45,7 +65,9 @@ const CreateAccount = () => {
             />
           </div>
           <div>
-            <label className="text-base text-gray-500 font-medium">Password</label>
+            <label className="text-base text-gray-500 font-medium">
+              Password
+            </label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
@@ -71,7 +93,7 @@ const CreateAccount = () => {
         </form>
 
         <p className="text-sm mt-4">
-          Already have an account?{' '}
+          Already have an account?{" "}
           <Link to="/login" className="text-red-700 font-bold hover:underline">
             Login
           </Link>

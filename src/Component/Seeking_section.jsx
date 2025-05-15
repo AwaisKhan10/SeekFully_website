@@ -3,7 +3,7 @@ import { CiLollipop } from "react-icons/ci";
 
 function Seeking_section() {
   return (
-    <div className="flex-1 space-y-4">
+    <div className="flex-1 space-y-4 font-montserrat">
       {/* Header Section */}
       <div>
         <h3 className="text-6xl seeking-font text-gray-800 text-center">

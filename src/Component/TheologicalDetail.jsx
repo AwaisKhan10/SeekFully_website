@@ -58,7 +58,7 @@ const TheologicalDetail = () => {
     );
 
   return (
-    <div className="flex bg-[#f9f9f9] min-h-screen">
+    <div className="flex bg-[#f9f9f9] min-h-screen font-montserrat">
       {/* Sidebar */}
       <aside className="w-20 bg-white shadow-md flex flex-col items-center py-4 fixed h-full z-10">
         <Sidebar />

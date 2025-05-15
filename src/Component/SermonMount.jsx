@@ -7,14 +7,31 @@ import { Link } from "react-router-dom";
 const SermonMount = () => {
   const books = {
     "Old Testament": [
-      "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
-      "Joshua", "Judges", "Ruth", "1 Samuel", "2 Samuel",
-      "1 Chronicles", "2 Chronicles"
+      "Genesis",
+      "Exodus",
+      "Leviticus",
+      "Numbers",
+      "Deuteronomy",
+      "Joshua",
+      "Judges",
+      "Ruth",
+      "1 Samuel",
+      "2 Samuel",
+      "1 Chronicles",
+      "2 Chronicles",
     ],
     "New Testament": [
-      "Matthew", "Mark", "Luke", "John", "Acts",
-      "Romans", "1 Corinthians", "2 Corinthians",
-      "Galatians", "Ephesians", "Philippians"
+      "Matthew",
+      "Mark",
+      "Luke",
+      "John",
+      "Acts",
+      "Romans",
+      "1 Corinthians",
+      "2 Corinthians",
+      "Galatians",
+      "Ephesians",
+      "Philippians",
     ],
   };
 
@@ -42,7 +59,7 @@ const SermonMount = () => {
     );
 
   return (
-    <div className="flex bg-[#f9f9f9] min-h-screen">
+    <div className="flex bg-[#f9f9f9] min-h-screen font-montserrat">
       {/* Sidebar */}
       <aside className="w-20 bg-white shadow-md flex flex-col items-center py-4 fixed h-full z-10">
         <Sidebar />
@@ -55,12 +72,12 @@ const SermonMount = () => {
           <div className="relative flex items-center text-sm font-normal text-gray-700 mb-6 select-none">
             <button className="flex items-center space-x-1 hover:underline">
               <i className="fas fa-arrow-left"></i>
-       <Link to="/jeremiah">      <span>Go Back</span></Link> 
+              <Link to="/jeremiah">
+                {" "}
+                <span>Go Back</span>
+              </Link>
             </button>
-            <div className="absolute left-1/2 transform -translate-x-1/2 flex space-x-6">
-              <button className="text-red-600 font-semibold border-b-2 border-red-600 pb-1">Study</button>
-              <button className="text-gray-300 cursor-default select-none">Study Note</button>
-            </div>
+
             <div className="ml-auto flex items-center space-x-1 text-gray-400 text-xs cursor-default select-none">
               <i className="far fa-clock"></i>
               <span>KJV</span>
@@ -109,7 +126,9 @@ const SermonMount = () => {
                           <Menu.Item key={book}>
                             {({ active }) => (
                               <button
-                                className={`w-full text-left ${active ? "text-red-500" : "text-gray-700"}`}
+                                className={`w-full text-left ${
+                                  active ? "text-red-500" : "text-gray-700"
+                                }`}
                               >
                                 {book}
                               </button>
@@ -140,7 +159,9 @@ const SermonMount = () => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white shadow-lg rounded-md p-4 text-sm">
-                  <div className="text-center font-semibold text-lg mb-3">Chapter</div>
+                  <div className="text-center font-semibold text-lg mb-3">
+                    Chapter
+                  </div>
                   <input
                     type="text"
                     placeholder="Search"
@@ -158,7 +179,9 @@ const SermonMount = () => {
                         {({ active }) => (
                           <button
                             className={`w-full py-1 rounded-md text-center text-sm font-medium ${
-                              active ? "bg-red-100 text-red-600" : "bg-gray-100 text-gray-700"
+                              active
+                                ? "bg-red-100 text-red-600"
+                                : "bg-gray-100 text-gray-700"
                             }`}
                           >
                             {ch}
@@ -188,8 +211,9 @@ const SermonMount = () => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white shadow-lg rounded-md p-4 text-sm">
-
-                  <div className="text-center font-semibold text-lg mb-3">Verse</div>
+                  <div className="text-center font-semibold text-lg mb-3">
+                    Verse
+                  </div>
                   <input
                     type="text"
                     placeholder="Search"
@@ -207,7 +231,9 @@ const SermonMount = () => {
                         {({ active }) => (
                           <button
                             className={`w-full py-1 rounded-md text-center text-sm font-medium ${
-                              active ? "bg-red-100 text-red-600" : "bg-gray-100 text-gray-700"
+                              active
+                                ? "bg-red-100 text-red-600"
+                                : "bg-gray-100 text-gray-700"
                             }`}
                           >
                             {v}
@@ -221,93 +247,127 @@ const SermonMount = () => {
             </Menu>
           </div>
 
-        <div className="flex space-x-3 mb-6 select-none">
-       <Link
-          to="/lexicon"
-          className="flex-1 bg-gray-500 text-white rounded-md py-6 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
-        >
-          Lexicon
-        </Link>
-      
-        <Link
-          to="/sermon-mount"
-          className="flex-1 bg-red-500 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
-        >
-          Interlinear
-        </Link>
-      
-        <Link
-         to="/cross-reference"
-         className="flex-1 bg-rose-300 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition">
-          Cross Reference
-        </Link>
-      </div>
+          <div className="flex space-x-3 mb-6 select-none">
+            <Link
+              to="/lexicon"
+              className="flex-1 bg-gray-500 text-white rounded-md py-6 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
+            >
+              Lexicon
+            </Link>
+
+            <Link
+              to="/sermon-mount"
+              className="flex-1 bg-red-500 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
+            >
+              Interlinear
+            </Link>
+
+            <Link
+              to="/cross-reference"
+              className="flex-1 bg-rose-300 text-white flex items-center justify-center rounded-md py-2 font-semibold text-sm hover:opacity-90 transition"
+            >
+              Cross Reference
+            </Link>
+          </div>
 
           {/* Chapter Title */}
-          <h1 className="text-xl font-semibold mb-3 select-text">Jeremiah 30</h1>
-{/* Verses */}
-<div className="grid grid-cols-8 gap-2 text-center text-xs leading-5 select-text">
-  {/* Row 1: Strong's numbers */}
-  <span className="text-red-600">3780 [e]</span>
-  <span className="text-red-600">3780 [e]</span>
-  <span className="text-red-600">3780 [e]</span>
-  <span className="text-red-600">3780 [e]</span>
-  <span className="text-red-600">3780 [e]</span>
-  <span className="text-red-600">3780 [e]</span>
-  <span className="text-red-600">3780 [e]</span>
-  <span className="text-red-600">3780 [e]</span>
+          <h1 className="text-3xl font-semibold mb-3 select-text">
+            Jeremiah 30
+          </h1>
+          {/* Verses */}
+          <div className="grid grid-cols-8 gap-6 mt-8 text-center text-md leading-5 select-text">
+            {/* Row 1: Strong's numbers */}
+            <span className="text-red-600">3780 [e]</span>
+            <span className="text-red-600">3780 [e]</span>
+            <span className="text-red-600">3780 [e]</span>
+            <span className="text-red-600">3780 [e]</span>
+            <span className="text-red-600">3780 [e]</span>
+            <span className="text-red-600">3780 [e]</span>
+            <span className="text-red-600">3780 [e]</span>
+            <span className="text-red-600">3780 [e]</span>
 
-  {/* Row 2: Transliterations */}
-  <span className="text-red-600">Idōn</span>
-  <span className="text-red-600">de</span>
-  <span className="text-red-600">tous</span>
-  <span className="text-red-600">ochlous</span>
-  <span className="text-red-600">Idōn</span>
-  <span className="text-red-600">de</span>
-  <span className="text-red-600">tous</span>
-  <span className="text-red-600">ochlous</span>
+            {/* Row 2: Transliterations */}
+            <span className="text-red-600">Idōn</span>
+            <span className="text-red-600">de</span>
+            <span className="text-red-600">tous</span>
+            <span className="text-red-600">ochlous</span>
+            <span className="text-red-600">Idōn</span>
+            <span className="text-red-600">de</span>
+            <span className="text-red-600">tous</span>
+            <span className="text-red-600">ochlous</span>
 
-  {/* Row 3: Greek words */}
-  <span><strong>1 ἰδὼν</strong></span>
-  <span><strong>δὲ</strong></span>
-  <span><strong>τοὺς</strong></span>
-  <span><strong>ὄχλους</strong></span>
-  <span><strong>2 ἰδὼν</strong></span>
-  <span><strong>δὲ</strong></span>
-  <span><strong>τοὺς</strong></span>
-  <span><strong>ὄχλους</strong></span>
+            {/* Row 3: Greek words */}
+            <span>
+              <strong>1 ἰδὼν</strong>
+            </span>
+            <span>
+              <strong>δὲ</strong>
+            </span>
+            <span>
+              <strong>τοὺς</strong>
+            </span>
+            <span>
+              <strong>ὄχλους</strong>
+            </span>
+            <span>
+              <strong>2 ἰδὼν</strong>
+            </span>
+            <span>
+              <strong>δὲ</strong>
+            </span>
+            <span>
+              <strong>τοὺς</strong>
+            </span>
+            <span>
+              <strong>ὄχλους</strong>
+            </span>
 
-  {/* Row 4: English gloss */}
-  <span className="text-red-600">Having seen</span>
-  <span className="text-red-600">Then</span>
-  <span className="text-red-600">The</span>
-  <span className="text-red-600">Crowds</span>
-  <span className="text-red-600">Having seen</span>
-  <span className="text-red-600">Then</span>
-  <span className="text-red-600">The</span>
-  <span className="text-red-600">Crowds</span>
+            {/* Row 4: English gloss */}
+            <span className="text-red-600">Having seen</span>
+            <span className="text-red-600">Then</span>
+            <span className="text-red-600">The</span>
+            <span className="text-red-600">Crowds</span>
+            <span className="text-red-600">Having seen</span>
+            <span className="text-red-600">Then</span>
+            <span className="text-red-600">The</span>
+            <span className="text-red-600">Crowds</span>
 
-    {/* Row 3: Greek words */}
-    <span><strong>1 ἰδὼν</strong></span>
-  <span><strong>δὲ</strong></span>
-  <span><strong>τοὺς</strong></span>
-  <span><strong>ὄχλους</strong></span>
-  <span><strong>2 ἰδὼν</strong></span>
-  <span><strong>δὲ</strong></span>
-  <span><strong>τοὺς</strong></span>
-  <span><strong>ὄχλους</strong></span>
+            {/* Row 3: Greek words */}
+            <span>
+              <strong>1 ἰδὼν</strong>
+            </span>
+            <span>
+              <strong>δὲ</strong>
+            </span>
+            <span>
+              <strong>τοὺς</strong>
+            </span>
+            <span>
+              <strong>ὄχλους</strong>
+            </span>
+            <span>
+              <strong>2 ἰδὼν</strong>
+            </span>
+            <span>
+              <strong>δὲ</strong>
+            </span>
+            <span>
+              <strong>τοὺς</strong>
+            </span>
+            <span>
+              <strong>ὄχλους</strong>
+            </span>
 
-  {/* Row 4: English gloss */}
-  <span className="text-red-600">Having seen</span>
-  <span className="text-red-600">Then</span>
-  <span className="text-red-600">The</span>
-  <span className="text-red-600">Crowds</span>
-  <span className="text-red-600">Having seen</span>
-  <span className="text-red-600">Then</span>
-  <span className="text-red-600">The</span>
-  <span className="text-red-600">Crowds</span>
-</div>
-
+            {/* Row 4: English gloss */}
+            <span className="text-red-600">Having seen</span>
+            <span className="text-red-600">Then</span>
+            <span className="text-red-600">The</span>
+            <span className="text-red-600">Crowds</span>
+            <span className="text-red-600">Having seen</span>
+            <span className="text-red-600">Then</span>
+            <span className="text-red-600">The</span>
+            <span className="text-red-600">Crowds</span>
+          </div>
         </div>
       </main>
     </div>

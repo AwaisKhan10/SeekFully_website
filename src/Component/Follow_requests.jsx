@@ -51,7 +51,7 @@ const users = [
 
 function Follow_requests() {
   return (
-    <div className="flex w-full">
+    <div className="flex w-full font-montserrat">
       {/* Sidebar on the left with fixed width */}
       <div className="w-64">
         <Sidebar />
@@ -78,7 +78,9 @@ function Follow_requests() {
                   className="w-12 h-12 rounded-full"
                 />
                 <div>
-                  <h3 className="text-sm font-bold text-gray-800">{user.name}</h3>
+                  <h3 className="text-sm font-bold text-gray-800">
+                    {user.name}
+                  </h3>
                   <p className="text-xs text-gray-500">{user.role}</p>
                   <ul className="text-sm mt-1 text-gray-700 space-y-[2px]">
                     {user.details.map((item, idx) => (

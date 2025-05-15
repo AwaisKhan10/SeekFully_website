@@ -58,7 +58,7 @@ const BibleBookStudy = () => {
     );
 
   return (
-    <div className="flex bg-[#f9f9f9] min-h-screen">
+    <div className="flex bg-[#f9f9f9] min-h-screen font-montserrat">
       {/* Sidebar */}
       <aside className="w-20 bg-white shadow-md flex flex-col items-center py-4 fixed h-full z-10">
         <Sidebar />
@@ -269,7 +269,7 @@ const BibleBookStudy = () => {
             </Link>
 
             <Link
-              to="/"
+              to="/theological-implication"
               className="flex-1 bg-yellow-600 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
             >
               Theological Implication
@@ -277,12 +277,12 @@ const BibleBookStudy = () => {
           </div>
 
           {/* Chapter Title */}
-          <h1 className="text-xl font-semibold mb-3 select-text">
+          <h1 className="text-3xl font-semibold mb-3 select-text">
             Jeremiah 30
           </h1>
 
           {/* Verses */}
-          <div className="text-xs leading-5 text-gray-900 select-text space-y-1">
+          <div className="text-xl leading-5 text-gray-900 select-text space-y-6">
             <p>1. In the beginning God created the heavens and the earth.</p>
             <p>
               2. Now the earth was formless and empty, darkness was over the

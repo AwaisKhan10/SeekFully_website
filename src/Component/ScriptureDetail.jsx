@@ -6,14 +6,31 @@ import { Link } from "react-router-dom";
 const ScriptureDetail = () => {
   const books = {
     "Old Testament": [
-      "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
-      "Joshua", "Judges", "Ruth", "1 Samuel", "2 Samuel",
-      "1 Chronicles", "2 Chronicles"
+      "Genesis",
+      "Exodus",
+      "Leviticus",
+      "Numbers",
+      "Deuteronomy",
+      "Joshua",
+      "Judges",
+      "Ruth",
+      "1 Samuel",
+      "2 Samuel",
+      "1 Chronicles",
+      "2 Chronicles",
     ],
     "New Testament": [
-      "Matthew", "Mark", "Luke", "John", "Acts",
-      "Romans", "1 Corinthians", "2 Corinthians",
-      "Galatians", "Ephesians", "Philippians"
+      "Matthew",
+      "Mark",
+      "Luke",
+      "John",
+      "Acts",
+      "Romans",
+      "1 Corinthians",
+      "2 Corinthians",
+      "Galatians",
+      "Ephesians",
+      "Philippians",
     ],
   };
 
@@ -41,7 +58,7 @@ const ScriptureDetail = () => {
     );
 
   return (
-    <div className="flex bg-[#f9f9f9] min-h-screen">
+    <div className="font-montserrat flex bg-[#f9f9f9] min-h-screen">
       {/* Sidebar */}
       <aside className="w-20 bg-white shadow-md flex flex-col items-center py-4 fixed h-full z-10">
         <Sidebar />
@@ -54,11 +71,18 @@ const ScriptureDetail = () => {
           <div className="relative flex items-center text-sm font-normal text-gray-700 mb-6 select-none">
             <button className="flex items-center space-x-1 hover:underline">
               <i className="fas fa-arrow-left"></i>
-           <Link to="/study-interlinear"> <span>Go Back</span> </Link>  
+              <Link to="/study-interlinear">
+                {" "}
+                <span>Go Back</span>{" "}
+              </Link>
             </button>
             <div className="absolute left-1/2 transform -translate-x-1/2 flex space-x-6">
-              <button className="text-red-600 font-semibold border-b-2 border-red-600 pb-1">Study</button>
-              <button className="text-gray-300 cursor-default select-none">Study Note</button>
+              <button className="text-red-600 font-semibold border-b-2 border-red-600 pb-1">
+                Study
+              </button>
+              <button className="text-gray-300 cursor-default select-none">
+                Study Note
+              </button>
             </div>
             <div className="ml-auto flex items-center space-x-1 text-gray-400 text-xs cursor-default select-none">
               <i className="far fa-clock"></i>
@@ -108,7 +132,9 @@ const ScriptureDetail = () => {
                           <Menu.Item key={book}>
                             {({ active }) => (
                               <button
-                                className={`w-full text-left ${active ? "text-red-500" : "text-gray-700"}`}
+                                className={`w-full text-left ${
+                                  active ? "text-red-500" : "text-gray-700"
+                                }`}
                               >
                                 {book}
                               </button>
@@ -139,7 +165,9 @@ const ScriptureDetail = () => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white shadow-lg rounded-md p-4 text-sm">
-                  <div className="text-center font-semibold text-lg mb-3">Chapter</div>
+                  <div className="text-center font-semibold text-lg mb-3">
+                    Chapter
+                  </div>
                   <input
                     type="text"
                     placeholder="Search"
@@ -157,7 +185,9 @@ const ScriptureDetail = () => {
                         {({ active }) => (
                           <button
                             className={`w-full py-1 rounded-md text-center text-sm font-medium ${
-                              active ? "bg-red-100 text-red-600" : "bg-gray-100 text-gray-700"
+                              active
+                                ? "bg-red-100 text-red-600"
+                                : "bg-gray-100 text-gray-700"
                             }`}
                           >
                             {ch}
@@ -187,8 +217,9 @@ const ScriptureDetail = () => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white shadow-lg rounded-md p-4 text-sm">
-
-                  <div className="text-center font-semibold text-lg mb-3">Verse</div>
+                  <div className="text-center font-semibold text-lg mb-3">
+                    Verse
+                  </div>
                   <input
                     type="text"
                     placeholder="Search"
@@ -206,7 +237,9 @@ const ScriptureDetail = () => {
                         {({ active }) => (
                           <button
                             className={`w-full py-1 rounded-md text-center text-sm font-medium ${
-                              active ? "bg-red-100 text-red-600" : "bg-gray-100 text-gray-700"
+                              active
+                                ? "bg-red-100 text-red-600"
+                                : "bg-gray-100 text-gray-700"
                             }`}
                           >
                             {v}
@@ -220,32 +253,28 @@ const ScriptureDetail = () => {
             </Menu>
           </div>
 
+          <div className="flex space-x-3 mb-6 select-none">
+            <Link
+              to="/word-study"
+              className="flex-1 bg-gray-500 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
+            >
+              Word Study
+            </Link>
 
-        <div className="flex space-x-3 mb-6 select-none">
-  <Link
-    to="/word-study"
-    className="flex-1 bg-gray-500 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
-  >
-    Word Study
-  </Link>
+            <Link
+              to="/scripture-study"
+              className="flex-1 bg-green-400 text-white rounded-md py-6 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
+            >
+              Scripture Study
+            </Link>
 
-  <Link
-    to="/scripture-study"
-    className="flex-1 bg-green-400 text-white rounded-md py-6 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
-  >
-Scripture Study
-  </Link>
-
-  <Link
-    to="/"
-    className="flex-1 bg-blue-300 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
-  >
-  Bible Book Study
-  </Link>
-</div>
-
-
- 
+            <Link
+              to="/"
+              className="flex-1 bg-blue-300 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
+            >
+              Bible Book Study
+            </Link>
+          </div>
         </div>
       </main>
     </div>

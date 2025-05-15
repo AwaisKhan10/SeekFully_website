@@ -44,7 +44,7 @@ function Notes() {
   };
 
   return (
-    <div className="flex min-h-screen bg-white">
+    <div className="flex min-h-screen bg-white font-montserrat">
       {/* Sidebar */}
       <div className="w-64">
         <Sidebar />
@@ -69,8 +69,7 @@ function Notes() {
               className="border rounded-lg p-4 shadow-sm border-gray-200"
             >
               <div className="text-[15px] mb-1">
-                You Added note on{" "}
-                <span className="font-bold">{item.name}</span>
+                You Added note on <span className="font-bold">{item.name}</span>
               </div>
               <div className="italic text-sm text-gray-700 mb-3">
                 {item.bookmark}
@@ -111,9 +110,7 @@ function Notes() {
               placeholder="Verse (e.g. Matthew 5:16)"
               className="w-full mb-2 px-4 py-2 border rounded-md text-sm"
               value={newNote.name}
-              onChange={(e) =>
-                setNewNote({ ...newNote, name: e.target.value })
-              }
+              onChange={(e) => setNewNote({ ...newNote, name: e.target.value })}
             />
             <textarea
               placeholder="Verse text"
@@ -138,18 +135,14 @@ function Notes() {
               placeholder="Note (e.g. Let your light shine)"
               className="w-full mb-2 px-4 py-2 border rounded-md text-sm"
               value={newNote.note}
-              onChange={(e) =>
-                setNewNote({ ...newNote, note: e.target.value })
-              }
+              onChange={(e) => setNewNote({ ...newNote, note: e.target.value })}
             />
             <input
               type="text"
               placeholder="Date (e.g. 20th Aug 2023 10:24 AM)"
               className="w-full mb-4 px-4 py-2 border rounded-md text-sm"
               value={newNote.date}
-              onChange={(e) =>
-                setNewNote({ ...newNote, date: e.target.value })
-              }
+              onChange={(e) => setNewNote({ ...newNote, date: e.target.value })}
             />
 
             <div className="flex justify-end gap-2">

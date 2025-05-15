@@ -25,14 +25,14 @@ function Profile() {
   };
   return (
     <>
-      <div className=" bg-gradient-to-b from-gray-300">
+      <div className=" bg-gradient-to-b from-gray-300 font-montserrat">
         <div className="flex flex-col items-center justify-center pt-5">
           <img src={profilepage} alt="" />
           <h1 className="text-xl text-black font-bold">Bernard Ward</h1>
           <p className="text-[#000000a9]">BernardWard@gmail.com</p>
         </div>
       </div>
-      <div className="text-gray-700 grid grid-cols-2 gap-4 mt-20 px-4 md:px-8 mx-auto w-full max-w-6xl">
+      <div className="font-montserrat text-gray-700 grid grid-cols-2 gap-4 mt-20 px-4 md:px-8 mx-auto w-full max-w-6xl">
         {/* Profile */}
         <Link
           to="/editprofile"

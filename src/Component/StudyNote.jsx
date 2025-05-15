@@ -8,37 +8,43 @@ export default function StudyNotes() {
 
   const notes = Array(6).fill({
     title: "Matthew 5:16",
-    verse: "16 Let your light shine before others, that they may see your good deeds and glorify your Father in heaven",
+    verse:
+      "16 Let your light shine before others, that they may see your good deeds and glorify your Father in heaven",
     reference: "Matthew 5:16 NIV",
     tag: "Let your light shine",
     date: "20th Aug 2023 10:24 AM",
   });
 
   return (
-    <div className="bg-white min-h-screen flex">
+    <div className="bg-white min-h-screen flex font-montserrat">
       <Sidebar />
 
       <main className="ml-48 w-full p-4">
         <div className="max-w-7xl mx-auto rounded-lg border border-gray-200 p-6">
-     <Link to="/home">  <a
-            href="#"
-            className="inline-flex items-center text-gray-700 text-sm font-normal mb-6 select-none"
-          >
-            <i className="fas fa-arrow-left mr-2"></i>
-            Go Back
-          </a>
-          </Link>   
+          <Link to="/home">
+            {" "}
+            <a
+              href="#"
+              className="inline-flex items-center text-gray-700 text-sm font-normal mb-6 select-none"
+            >
+              <i className="fas fa-arrow-left mr-2"></i>
+              Go Back
+            </a>
+          </Link>
 
           <div className="flex justify-center mb-6">
-  <div className="flex space-x-6 text-base font-semibold">
-   <Link to="/study"><a href="" className="text-gray-400 cursor-default select-none">Study</a> </Link> 
-    <button className="relative text-red-700 font-bold">
-      Study Note
-      <span className="absolute left-0 -bottom-1 w-full h-1 bg-red-700"></span>
-    </button>
-  </div>
-</div>
-
+            <div className="flex space-x-6 text-base font-semibold">
+              <Link to="/study">
+                <a href="" className="text-gray-400 cursor-default select-none">
+                  Study
+                </a>{" "}
+              </Link>
+              <button className="relative text-red-700 font-bold">
+                Study Note
+                <span className="absolute left-0 -bottom-1 w-full h-1 bg-red-700"></span>
+              </button>
+            </div>
+          </div>
 
           <form className="mb-6">
             <input
@@ -136,7 +142,8 @@ export default function StudyNotes() {
                       <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-md z-20 text-sm">
                         <ul>
                           <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                            <i className="fas fa-external-link-alt mr-2"></i> Open
+                            <i className="fas fa-external-link-alt mr-2"></i>{" "}
+                            Open
                           </li>
                           <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                             <i className="fas fa-share mr-2"></i> Share
@@ -148,10 +155,12 @@ export default function StudyNotes() {
                             <i className="fas fa-heart mr-2"></i> Favourite
                           </li>
                           <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                            <i className="fas fa-folder mr-2"></i> Move to Folder
+                            <i className="fas fa-folder mr-2"></i> Move to
+                            Folder
                           </li>
                           <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                            <i className="fas fa-file-alt mr-2"></i> Save to File
+                            <i className="fas fa-file-alt mr-2"></i> Save to
+                            File
                           </li>
                           <li className="px-4 py-2 text-red-600 hover:bg-gray-100 cursor-pointer">
                             <i className="fas fa-trash mr-2"></i> Delete
@@ -164,7 +173,10 @@ export default function StudyNotes() {
                   {/* Note Text Content */}
                   <div className="space-y-1 pr-6">
                     <p className="text-sm text-gray-600 font-medium">
-                      You Added note on <span className="font-semibold text-gray-800">{note.title}</span>
+                      You Added note on{" "}
+                      <span className="font-semibold text-gray-800">
+                        {note.title}
+                      </span>
                     </p>
                     <p className="text-xs text-gray-500">{note.verse}</p>
                     <p className="text-xs font-semibold text-gray-600 mt-1">

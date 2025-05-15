@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 export default function StudyInterliner() {
   return (
-    <div className="flex bg-[#f9f9f9] min-h-screen">
+    <div className="flex bg-[#f9f9f9] min-h-screen font-montserrat">
       {/* Fixed Left Sidebar */}
-      <aside className="w-20 bg-white shadow-md flex flex-col items-center py-4 min-h-screen fixed top-0 left-0">
+      <aside className="w-40 bg-white shadow-md flex flex-col items-center py-4 min-h-screen fixed top-[-2%] left-0">
         <Sidebar />
       </aside>
       {/* Main Content */}

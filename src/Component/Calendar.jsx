@@ -50,7 +50,7 @@ function Calendar() {
       days.push(
         <div
           key={day}
-          className={`w-10 h-10 flex items-center justify-center rounded-full text-base font-medium transition-all duration-200 hover:bg-pink-100
+          className={`font-montserrat w-10 h-10 flex items-center justify-center rounded-full text-base font-medium transition-all duration-200 hover:bg-pink-100
             ${
               isToday
                 ? "text-gray-800 font-semibold border-2 border-red-500"
@@ -66,7 +66,7 @@ function Calendar() {
   };
   return (
     <>
-      <div className="flex-1">
+      <div className="flex-1 font-montserrat">
         <div className="bg-red-600 text-white px-4 py-2 rounded-t-lg flex justify-between items-center">
           <button
             onClick={prevMonth}

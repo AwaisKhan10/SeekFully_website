@@ -6,14 +6,31 @@ import { Link } from "react-router-dom";
 const Corinthians = () => {
   const books = {
     "Old Testament": [
-      "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
-      "Joshua", "Judges", "Ruth", "1 Samuel", "2 Samuel",
-      "1 Chronicles", "2 Chronicles"
+      "Genesis",
+      "Exodus",
+      "Leviticus",
+      "Numbers",
+      "Deuteronomy",
+      "Joshua",
+      "Judges",
+      "Ruth",
+      "1 Samuel",
+      "2 Samuel",
+      "1 Chronicles",
+      "2 Chronicles",
     ],
     "New Testament": [
-      "Matthew", "Mark", "Luke", "John", "Acts",
-      "Romans", "1 Corinthians", "2 Corinthians",
-      "Galatians", "Ephesians", "Philippians"
+      "Matthew",
+      "Mark",
+      "Luke",
+      "John",
+      "Acts",
+      "Romans",
+      "1 Corinthians",
+      "2 Corinthians",
+      "Galatians",
+      "Ephesians",
+      "Philippians",
     ],
   };
 
@@ -41,7 +58,7 @@ const Corinthians = () => {
     );
 
   return (
-    <div className="flex bg-[#f9f9f9] min-h-screen">
+    <div className="flex bg-[#f9f9f9] min-h-screen font-montserrat">
       {/* Sidebar */}
       <aside className="w-20 bg-white shadow-md flex flex-col items-center py-4 fixed h-full z-10">
         <Sidebar />
@@ -54,12 +71,12 @@ const Corinthians = () => {
           <div className="relative flex items-center text-sm font-normal text-gray-700 mb-6 select-none">
             <button className="flex items-center space-x-1 hover:underline">
               <i className="fas fa-arrow-left"></i>
-           <Link to="/study-interlinear"> <span>Go Back</span> </Link>  
+              <Link to="/study-interlinear">
+                {" "}
+                <span>Go Back</span>{" "}
+              </Link>
             </button>
-            <div className="absolute left-1/2 transform -translate-x-1/2 flex space-x-6">
-              <button className="text-red-600 font-semibold border-b-2 border-red-600 pb-1">Study</button>
-              <button className="text-gray-300 cursor-default select-none">Study Note</button>
-            </div>
+
             <div className="ml-auto flex items-center space-x-1 text-gray-400 text-xs cursor-default select-none">
               <i className="far fa-clock"></i>
               <span>KJV</span>
@@ -108,7 +125,9 @@ const Corinthians = () => {
                           <Menu.Item key={book}>
                             {({ active }) => (
                               <button
-                                className={`w-full text-left ${active ? "text-red-500" : "text-gray-700"}`}
+                                className={`w-full text-left ${
+                                  active ? "text-red-500" : "text-gray-700"
+                                }`}
                               >
                                 {book}
                               </button>
@@ -139,7 +158,9 @@ const Corinthians = () => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white shadow-lg rounded-md p-4 text-sm">
-                  <div className="text-center font-semibold text-lg mb-3">Chapter</div>
+                  <div className="text-center font-semibold text-lg mb-3">
+                    Chapter
+                  </div>
                   <input
                     type="text"
                     placeholder="Search"
@@ -157,7 +178,9 @@ const Corinthians = () => {
                         {({ active }) => (
                           <button
                             className={`w-full py-1 rounded-md text-center text-sm font-medium ${
-                              active ? "bg-red-100 text-red-600" : "bg-gray-100 text-gray-700"
+                              active
+                                ? "bg-red-100 text-red-600"
+                                : "bg-gray-100 text-gray-700"
                             }`}
                           >
                             {ch}
@@ -187,8 +210,9 @@ const Corinthians = () => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white shadow-lg rounded-md p-4 text-sm">
-
-                  <div className="text-center font-semibold text-lg mb-3">Verse</div>
+                  <div className="text-center font-semibold text-lg mb-3">
+                    Verse
+                  </div>
                   <input
                     type="text"
                     placeholder="Search"
@@ -206,7 +230,9 @@ const Corinthians = () => {
                         {({ active }) => (
                           <button
                             className={`w-full py-1 rounded-md text-center text-sm font-medium ${
-                              active ? "bg-red-100 text-red-600" : "bg-gray-100 text-gray-700"
+                              active
+                                ? "bg-red-100 text-red-600"
+                                : "bg-gray-100 text-gray-700"
                             }`}
                           >
                             {v}
@@ -221,65 +247,111 @@ const Corinthians = () => {
           </div>
 
           <div className="flex space-x-3 mb-6 select-none">
+            <Link
+              to="/lexicon"
+              className="flex-1 bg-gray-500 text-white rounded-md py-6 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
+            >
+              Lexicon
+            </Link>
 
+            <Link
+              to="/sermon-mount"
+              className="flex-1 bg-rose-300 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
+            >
+              Cross Reference
+            </Link>
 
- <Link
-    to="/lexicon"
-    className="flex-1 bg-gray-500 text-white rounded-md py-6 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
-  >
-    Lexicon
-  </Link>
-
-  <Link
-    to="/sermon-mount"
-    className="flex-1 bg-rose-300 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
-  >
-    Cross Reference
-  </Link>
-
-  <Link
-    to="/jeremiah"
-    className="flex-1 bg-red-500 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
-  >
-    Interlinear
-  </Link>
-</div>
-
+            <Link
+              to="/jeremiah"
+              className="flex-1 bg-red-500 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
+            >
+              Interlinear
+            </Link>
+          </div>
 
           {/* Main Passage */}
-<div className="text-sm leading-6 text-gray-900 select-text mb-4">
-  <p className="font-semibold">
-    Main Passage: 1 Corinthians 13:4–8 (NIV)
-  </p>
-  <p>
-    4 Love is patient, love is kind. It does not envy, it does not boast, it is not proud.
-    5 It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs.
-    6 Love does not delight in evil but rejoices with the truth.
-    7 It always protects, always trusts, always hopes, always perseveres.
-    8 Love never fails. But where there are prophecies, they will cease;
-    where there are tongues, they will be stilled; where there is knowledge, it will pass away.
-  </p>
-</div>
+          <div className="text-xl leading-6 text-gray-900 select-text mb-4">
+            <p className="font-semibold">
+              Main Passage: 1 Corinthians 13:4–8 (NIV)
+            </p>
+            <p className="text-lg text-gray-700 mt-2">
+              4 Love is patient, love is kind. It does not envy, it does not
+              boast, it is not proud. 5 It does not dishonor others, it is not
+              self-seeking, it is not easily angered, it keeps no record of
+              wrongs. 6 Love does not delight in evil but rejoices with the
+              truth. 7 It always protects, always trusts, always hopes, always
+              perseveres. 8 Love never fails. But where there are prophecies,
+              they will cease; where there are tongues, they will be stilled;
+              where there is knowledge, it will pass away.
+            </p>
+          </div>
 
-{/* Cross-Reference Passages */}
-<div className="text-sm text-gray-900 select-text">
-  <p className="font-semibold mb-2">Cross-Reference Passages</p>
+          {/* Cross-Reference Passages */}
+          <div className="text-2xl text-gray-900 select-text">
+            <p className="font-semibold mb-2">Cross-Reference Passages</p>
 
-  <div className="grid grid-cols-12 border-t border-gray-300 text-xs font-semibold text-left py-2">
-    <div className="col-span-3 px-2">Passage</div>
-    <div className="col-span-9 px-2">Content</div>
-  </div>
+            <div className="grid grid-cols-12 border-t border-gray-300 text-lg font-semibold text-left py-2">
+              <div className="col-span-3 px-2">Passage</div>
+              <div className="col-span-9 px-2">Content</div>
+            </div>
 
-  <div className="grid grid-cols-12 border-t border-gray-200 py-2 text-xs">
-    <div className="col-span-3 px-2">1. John 4:7–8</div>
-    <div className="col-span-9 px-2">
-      Dear friends, let us love one another, for love comes from God.
-      Everyone who loves has been born of God and knows God.
-      Whoever does not love does not know God, because God is love.
-    </div>
-  </div>
-</div>
-
+            <div className="grid grid-cols-12 border-t border-gray-200 py-2 text-lg">
+              <div className="col-span-3 px-2">1. John 4:7–8</div>
+              <div className="col-span-9 px-2">
+                Dear friends, let us love one another, for love comes from God.
+                Everyone who loves has been born of God and knows God. Whoever
+                does not love does not know God, because God is love.
+              </div>
+            </div>
+            <div className="grid grid-cols-12 border-t border-gray-200 py-2 text-lg">
+              <div className="col-span-3 px-2">2. John 4:7–8</div>
+              <div className="col-span-9 px-2">
+                Dear friends, let us love one another, for love comes from God.
+                Everyone who loves has been born of God and knows God. Whoever
+                does not love does not know God, because God is love.
+              </div>
+            </div>
+            <div className="grid grid-cols-12 border-t border-gray-200 py-2 text-lg">
+              <div className="col-span-3 px-2">3. John 4:7–8</div>
+              <div className="col-span-9 px-2">
+                Dear friends, let us love one another, for love comes from God.
+                Everyone who loves has been born of God and knows God. Whoever
+                does not love does not know God, because God is love.
+              </div>
+            </div>
+            <div className="grid grid-cols-12 border-t border-gray-200 py-2 text-lg">
+              <div className="col-span-3 px-2">4. John 4:7–8</div>
+              <div className="col-span-9 px-2">
+                Dear friends, let us love one another, for love comes from God.
+                Everyone who loves has been born of God and knows God. Whoever
+                does not love does not know God, because God is love.
+              </div>
+            </div>
+            <div className="grid grid-cols-12 border-t border-gray-200 py-2 text-lg">
+              <div className="col-span-3 px-2">5. John 4:7–8</div>
+              <div className="col-span-9 px-2">
+                Dear friends, let us love one another, for love comes from God.
+                Everyone who loves has been born of God and knows God. Whoever
+                does not love does not know God, because God is love.
+              </div>
+            </div>
+            <div className="grid grid-cols-12 border-t border-gray-200 py-2 text-lg">
+              <div className="col-span-3 px-2">6. John 4:7–8</div>
+              <div className="col-span-9 px-2">
+                Dear friends, let us love one another, for love comes from God.
+                Everyone who loves has been born of God and knows God. Whoever
+                does not love does not know God, because God is love.
+              </div>
+            </div>
+            <div className="grid grid-cols-12 border-t border-gray-200 py-2 text-lg">
+              <div className="col-span-3 px-2">7. John 4:7–8</div>
+              <div className="col-span-9 px-2">
+                Dear friends, let us love one another, for love comes from God.
+                Everyone who loves has been born of God and knows God. Whoever
+                does not love does not know God, because God is love.
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </div>

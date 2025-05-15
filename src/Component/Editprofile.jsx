@@ -37,12 +37,37 @@ function Editprofile() {
   ]);
 
   const [friends] = useState([
-    { id: 1, name: "Ralph Edwards", detail: "TCPA Compliance", image: profilepage },
-    { id: 2, name: "Jerome Bell", detail: "Speech Recognition", image: profilepage },
-    { id: 3, name: "Ronald Richards", detail: "Quality Monitoring", image: profilepage },
+    {
+      id: 1,
+      name: "Ralph Edwards",
+      detail: "TCPA Compliance",
+      image: profilepage,
+    },
+    {
+      id: 2,
+      name: "Jerome Bell",
+      detail: "Speech Recognition",
+      image: profilepage,
+    },
+    {
+      id: 3,
+      name: "Ronald Richards",
+      detail: "Quality Monitoring",
+      image: profilepage,
+    },
     { id: 4, name: "Guy Hawkins", detail: "Voicestream", image: profilepage },
-    { id: 5, name: "Kristin Watson", detail: "UC Integrations", image: profilepage },
-    { id: 6, name: "Floyd Miles", detail: "Preview Dialer", image: profilepage },
+    {
+      id: 5,
+      name: "Kristin Watson",
+      detail: "UC Integrations",
+      image: profilepage,
+    },
+    {
+      id: 6,
+      name: "Floyd Miles",
+      detail: "Preview Dialer",
+      image: profilepage,
+    },
   ]);
 
   const handleImageUpload = (e) => {
@@ -57,7 +82,7 @@ function Editprofile() {
   };
 
   return (
-    <div className="flex w-full m-0 p-0">
+    <div className="flex w-full m-0 p-0 font-montserrat">
       {/* Sidebar */}
       <div className="w-64">
         <Sidebar />

@@ -18,7 +18,7 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="w-[80px] sm:w-[100px] md:w-[120px] lg:w-[150px] h-screen bg-white shadow-md flex flex-col items-center py-6 fixed">
+    <div className="w-[80px] sm:w-[100px] md:w-[120px] lg:w-[150px] h-screen bg-white shadow-md flex flex-col items-center py-6 fixed font-montserrat">
       {/* Create Button */}
       <Link to="/tool">
         <div className="flex flex-col items-center text-center mb-8">
@@ -76,7 +76,7 @@ const Sidebar = () => {
               } p-2 rounded-lg`}
             >
               {/* <img src={book} alt="Bible" className="w-8 h-8" /> */}
-              <LiaBibleSolid className="text-5xl text-gray-700" />
+              <LiaBibleSolid className="text-[45px]  font-bold text-gray-700" />
             </div>
             <span className="text-[10px] mt-1 text-gray-700 uppercase font-medium">
               Bible
@@ -101,15 +101,22 @@ const Sidebar = () => {
         </Link>
 
         {/* Static Link without navigation */}
-        <li className="flex flex-col items-center cursor-pointer hover:scale-110 transition-transform">
-          <div className="hover:bg-red-300 p-2 rounded-lg">
-            {/* <img src={Ai} alt="AI" className="w-8 h-8" /> */}
-            <h1 className="text-3xl font-semibold">AI</h1>
-          </div>
-          <span className="text-[10px] mt-1 text-gray-700 uppercase font-medium">
-            Seeker AI
-          </span>
-        </li>
+        <Link to="/seeker-ai">
+          <li className="flex flex-col items-center cursor-pointer hover:scale-110 transition-transform">
+            <div
+              className={`${
+                isActive("/seeker-ai") ? "bg-red-300" : "hover:bg-red-300"
+              } p-2 rounded-lg`}
+            >
+              {/* <img src={Ai} alt="AI" className="w-8 h-8" /> */}
+
+              <h1 className="text-3xl font-semibold">AI</h1>
+            </div>
+            <span className="text-[10px] mt-1 text-gray-700 uppercase font-medium">
+              Seeker AI
+            </span>
+          </li>
+        </Link>
 
         <Link to="/profile">
           <li className="flex flex-col items-center cursor-pointer hover:scale-110 transition-transform">

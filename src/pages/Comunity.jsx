@@ -42,7 +42,7 @@ function Post({ username, content, image, time, initialLikes }) {
   };
 
   return (
-    <div className="flex flex-col p-4 border-b border-gray-200 relative">
+    <div className="flex flex-col p-4 border-b border-gray-200 relative font-montserrat">
       <div className="flex">
         <div className="mr-4">
           <img src={profile} alt="Profile" className="w-12 h-12 rounded-full" />
@@ -221,12 +221,15 @@ function Community() {
               Welcome Jackson...
             </h1>
             <div className="lg:ml-28 mt-2 lg:mt-0 flex gap-8 text-[#29272780] font-semibold">
-          <Link to="/">   <a
-                href="#"
-                className="relative inline-block font-bold hover:text-red-700 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-700 after:transition-all after:duration-300 hover:after:w-full"
-              >
-                Mapping
-              </a></Link> 
+              <Link to="/">
+                {" "}
+                <a
+                  href="#"
+                  className="relative inline-block font-bold hover:text-red-700 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-700 after:transition-all after:duration-300 hover:after:w-full"
+                >
+                  Mapping
+                </a>
+              </Link>
               <a
                 href="#"
                 className="relative inline-block font-bold hover:text-red-700 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-700 after:transition-all after:duration-300 hover:after:w-full"
@@ -282,7 +285,8 @@ function Community() {
             />
             {selectedFileName && (
               <span className="text-sm text-gray-600">
-                Selected file: <span className="font-medium">{selectedFileName}</span>
+                Selected file:{" "}
+                <span className="font-medium">{selectedFileName}</span>
               </span>
             )}
           </div>

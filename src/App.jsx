@@ -20,6 +20,7 @@ import HistoricalContext from "./Component/HistoricalContext";
 import HistoricalDetail from "./Component/HistoricalDetail";
 import WordStudy from "./Component/WordStudy";
 import WordStudyDetail from "./Component/WordStudyDetail";
+import Templets from "./Component/Tamplets";
 import ScriptureStudy from "./Component/ScriptureStudy";
 import ScriptureDetail from "./Component/ScriptureDetail";
 import BibleBookStudy from "./Component/BibleBookStudy";
@@ -38,6 +39,8 @@ import Bookmark from "./Component/Bookmark";
 import Highligted from "./Component/Highligted";
 import Notes from "./Component/Notes";
 import Gift_seekfully from "./Component/Gift_seekfully";
+import Recents from "./Component/Recents";
+import Ai from "./pages/Ai";
 
 function App() {
   return (
@@ -77,7 +80,7 @@ function App() {
           <Route path="/theological-detail" element={<TheologicalDetail />} />
           <Route path="/study-notes" element={<StudyNotes />} />
           <Route path="/more" element={<More />} />
-
+          <Route path="/seeker-ai" element={<Ai />} />
           <Route path="/bible" element={<BibleJeremiah30Page />} />
 
           <Route path="/Comunity" element={<Comunity />} />
@@ -89,6 +92,8 @@ function App() {
           <Route path="/highlighted" element={<Highligted />} />
           <Route path="/notes" element={<Notes />} />
           <Route path="/giftseekfully" element={<Gift_seekfully />} />
+          <Route path="/templets" element={<Templets />} />
+          <Route path="/recents" element={<Recents />} />
         </Routes>
       </Router>
     </div>

@@ -60,7 +60,7 @@ function Highligted() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-white">
+    <div className="flex min-h-screen bg-white font-montserrat">
       {/* Sidebar */}
       <div className="w-64">
         <Sidebar />
