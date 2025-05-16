@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import ailogo from "../assets/ailogo.png";
 import Sidebar from "../Component/SideBar";
-const [message, setMessage] = useState("");
 import { IoIosSend } from "react-icons/io";
 
 function Ai() {
+  const [message, setMessage] = useState(""); // ✅ useState moved here
+
   return (
     <>
       <div className="flex items-center justify-center min-h-screen bg-white">
@@ -32,7 +33,7 @@ function Ai() {
               className="flex-grow px-4 py-2 outline-none text-sm"
             />
             <button className="bg-red-600 p-2 text-white hover:bg-red-700">
-              <Send size={16} />
+              <IoIosSend size={16} />
             </button>
           </div>
         </div>

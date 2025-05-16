@@ -9,3 +9,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.rainbow-bar {
+  background: linear-gradient(to right, red, orange, yellow, green, cyan, blue);
+}
+

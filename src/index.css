@@ -6,3 +6,12 @@
 .btn {
   @apply px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700 transition;
 }
+/* Hide scrollbar for all browsers */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+.custom-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
