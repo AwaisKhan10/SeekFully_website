@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Sidebar from "../Component/SideBar";
 import h1 from "../assets/h1.png";
 import h2 from "../assets/h2.png";
@@ -11,6 +10,7 @@ import hh6 from "../assets/hh4.png";
 import hh7 from "../assets/hh4.png";
 import hh8 from "../assets/hh4.png";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const templateImages = [h1, h2, h3, h4, h5];
 const recentImages = [hh4, hh5, hh6, hh7, hh8];
@@ -20,7 +20,7 @@ const colors = ["#b91c1c", "#facc15", "#4ade80", "#60a5fa", "#a78bfa"];
 const Home = () => {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  // const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className="flex">

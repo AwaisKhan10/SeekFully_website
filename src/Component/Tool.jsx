@@ -1,19 +1,19 @@
 import React from "react";
-import rect from "../assets/rect.png";
-import circle from "../assets/circle.png";
-import text from "../assets/txt.png";
-import pen from "../assets/pen.png";
-import line from "../assets/line.png";
-import img from "../assets/img.png";
+import box2 from "../assets/box2.png";
+import circle2 from "../assets/circle2.png";
+import text2 from "../assets/txt2.png";
+import pen2 from "../assets/pen2.png";
+import line from "../assets/line2.png";
+import img from "../assets/img4.png";
 import { Link } from "react-router-dom";
 import { FaArrowUp, FaChevronDown } from "react-icons/fa";
 
 const Tool = () => {
   const tools = [
-    { label: "Square", src: rect },
-    { label: "Circle", src: circle },
-    { label: "Text", src: text },
-    { label: "Pen", src: pen },
+ { label: "Square", src: box2 }, 
+    { label: "Circle", src: circle2 },
+    { label: "Text", src: text2 },
+    { label: "Pen", src: pen2 },
     { label: "Line", src: line },
     { label: "Image", src: img },
   ];
@@ -48,7 +48,7 @@ const Tool = () => {
               }}
             >
               <div className="absolute inset-[5px] bg-white rounded-full flex items-center justify-center">
-                <span className="text-black text-[16px] -mt-1">+</span>
+                <span className="text-black text-[16px] ">+</span>
               </div>
             </div>
 
@@ -59,7 +59,7 @@ const Tool = () => {
                 className="w-7 h-7 rounded-full flex items-center justify-center cursor-pointer flex-shrink-0"
               >
                 <div
-                  className="w-7 h-7 rounded-full border border-gray-300"
+                  className="w-10 h-7 rounded-full border border-gray-300"
                   style={{ backgroundColor: color }}
                 />
               </div>
@@ -74,7 +74,7 @@ const Tool = () => {
 
         {/* Color Dropdown (Design Only) */}
         <div className="relative mt-2 sm:mt-0">
-          <div className="flex items-center justify-center -ms-5 w-20 h-[58px] border border-red-700 rounded-lg bg-white cursor-pointer">
+          <div className="flex items-center justify-center -ms-5 w-20 h-[46px] border border-red-700 rounded-lg bg-white cursor-pointer">
             <div
               className="w-8 h-8 rounded-full border border-red-700"
               style={{ backgroundColor: "#b91c1c" }}
