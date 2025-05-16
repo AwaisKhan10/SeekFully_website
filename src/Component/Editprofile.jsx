@@ -10,7 +10,6 @@ import Sidebar from "./SideBar";
 function Editprofile() {
   const navigate = useNavigate();
   const [isEditingName, setIsEditingName] = useState(false);
-  const [profileImage, setProfileImage] = useState("default-avatar.jpg");
   const [name, setName] = useState("Bernard Ward");
   const [email] = useState("BernardWard@gmail.com");
   const [location, setLocation] = useState("Minnesota, US");
@@ -82,19 +81,19 @@ function Editprofile() {
   };
 
   return (
-    <div className="flex w-full m-0 p-0 font-montserrat">
+    <div className="flex w-full m-0 p-0 font-montserrat bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       {/* Sidebar */}
       <div className="w-64">
         <Sidebar />
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 max-w-5xl p-4 md:p-6 bg-white rounded-lg mx-auto">
+      <div className="flex-1 max-w-5xl p-4 md:p-6 mx-auto">
         {/* Back Button */}
         <div className="mb-4">
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-800 text-2xl font-semibold"
+            className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white text-2xl font-semibold"
           >
             <FiArrowLeft className="text-2xl" />
             Back
@@ -107,11 +106,11 @@ function Editprofile() {
             <img
               src={profilepage}
               alt="Profile"
-              className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-red-100 cursor-pointer"
+              className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-red-100 cursor-pointer object-cover"
             />
             <label
               htmlFor="image-upload"
-              className="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-md cursor-pointer hover:bg-gray-100"
+              className="absolute bottom-0 right-0 bg-white dark:bg-gray-700 p-2 rounded-full shadow-md cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
             >
               <FiUpload className="text-red-600" />
               <input
@@ -131,7 +130,7 @@ function Editprofile() {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="text-2xl font-bold border-b-2 border-red-500 outline-none"
+                  className="text-2xl font-bold border-b-2 border-red-500 outline-none bg-transparent"
                 />
               ) : (
                 <h1 className="text-2xl font-bold">{name}</h1>
@@ -143,24 +142,24 @@ function Editprofile() {
                 {isEditingName ? <FiSave size={20} /> : <FiEdit size={20} />}
               </button>
             </div>
-            <p className="text-gray-600 mb-1">{email}</p>
-            <p className="text-gray-600">{location}</p>
+            <p className="text-gray-600 dark:text-gray-400 mb-1">{email}</p>
+            <p className="text-gray-600 dark:text-gray-400">{location}</p>
           </div>
         </div>
 
         {/* Bio Section */}
         <div className="mb-8 text-center md:text-left">
           <h3 className="text-lg font-semibold mb-2">Bio</h3>
-          <p className="text-gray-600">{bio}</p>
+          <p className="text-gray-700 dark:text-gray-300">{bio}</p>
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-8 border-b mb-6 justify-center md:justify-start">
+        <div className="flex gap-8 border-b border-gray-300 dark:border-gray-700 mb-6 justify-center md:justify-start">
           <button
             className={`py-2 px-4 font-semibold ${
               selectedTab === "posts"
                 ? "border-b-2 border-red-600 text-red-600"
-                : "text-gray-600 hover:text-red-600"
+                : "text-gray-600 dark:text-gray-300 hover:text-red-600"
             }`}
             onClick={() => setSelectedTab("posts")}
           >
@@ -170,7 +169,7 @@ function Editprofile() {
             className={`py-2 px-4 font-semibold ${
               selectedTab === "friends"
                 ? "border-b-2 border-red-600 text-red-600"
-                : "text-gray-600 hover:text-red-600"
+                : "text-gray-600 dark:text-gray-300 hover:text-red-600"
             }`}
             onClick={() => setSelectedTab("friends")}
           >
@@ -182,7 +181,10 @@ function Editprofile() {
         {selectedTab === "posts" && (
           <div className="mb-8">
             {posts.map((post) => (
-              <div key={post.id} className="bg-gray-50 p-4 rounded-lg mb-6">
+              <div
+                key={post.id}
+                className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg mb-6 transition-colors"
+              >
                 <div className="flex items-center mb-4">
                   <img
                     src={profilepage}
@@ -191,10 +193,14 @@ function Editprofile() {
                   />
                   <div>
                     <h4 className="font-semibold">{post.name}</h4>
-                    <p className="text-xs text-gray-500">{post.time}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      {post.time}
+                    </p>
                   </div>
                 </div>
-                <p className="text-gray-700 mb-4">{post.content}</p>
+                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  {post.content}
+                </p>
                 {post.image && (
                   <img
                     src={post.image}
@@ -202,7 +208,7 @@ function Editprofile() {
                     className="w-full rounded-lg mb-4 max-h-[400px] object-cover"
                   />
                 )}
-                <div className="flex gap-6 text-gray-500">
+                <div className="flex gap-6 text-gray-500 dark:text-gray-400">
                   <button className="flex items-center gap-1 hover:text-blue-600">
                     <AiOutlineLike className="text-xl" /> 300
                   </button>
@@ -221,7 +227,7 @@ function Editprofile() {
             {friends.map((friend) => (
               <div
                 key={friend.id}
-                className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100"
+                className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
               >
                 <div className="flex items-center gap-4">
                   <img
@@ -231,10 +237,14 @@ function Editprofile() {
                   />
                   <div>
                     <h4 className="font-semibold">{friend.name}</h4>
-                    <p className="text-gray-600 text-sm">{friend.detail}</p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
+                      {friend.detail}
+                    </p>
                   </div>
                 </div>
-                <span className="text-sm text-gray-500">6k followers</span>
+                <span className="text-sm text-gray-500 dark:text-gray-300">
+                  6k followers
+                </span>
               </div>
             ))}
           </div>

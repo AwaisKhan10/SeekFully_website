@@ -2,9 +2,11 @@ import React from "react";
 
 function Trending() {
   return (
-    <div className="hidden font-montserrat lg:block w-full bg-white shadow-md p-4 rounded-lg mt-14 sm:mt-28 md:mt-48">
-      <h3 className="font-bold text-lg mb-4">Trending Topics</h3>
-      <ul className="text-sm text-gray-600 space-y-1">
+    <div className="hidden font-montserrat lg:block w-full bg-white dark:bg-gray-900 shadow-md p-4 rounded-lg mt-14 sm:mt-28 md:mt-48 transition-colors duration-300">
+      <h3 className="font-bold text-lg mb-4 text-gray-900 dark:text-gray-100">
+        Trending Topics
+      </h3>
+      <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
         <li>DESIGN</li>
         <li>MOVIES AND SERIES</li>
         <li>Spider-Man: Across the Spider-Verse</li>

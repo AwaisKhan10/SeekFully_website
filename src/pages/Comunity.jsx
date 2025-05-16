@@ -22,7 +22,7 @@ function Post({ username, content, image, time, initialLikes }) {
 
   const handleLike = () => {
     if (liked) {
-      setLikes(0);
+      setLikes(likes - 1);
       setLiked(false);
     } else {
       setLikes(likes + 1);
@@ -42,15 +42,21 @@ function Post({ username, content, image, time, initialLikes }) {
   };
 
   return (
-    <div className="flex flex-col p-4 border-b border-gray-200 relative font-montserrat">
+    <div className="flex flex-col p-4 border-b border-gray-200 dark:border-gray-700 relative font-montserrat bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       <div className="flex">
         <div className="mr-4">
-          <img src={profile} alt="Profile" className="w-12 h-12 rounded-full" />
+          <img
+            src={profile}
+            alt="Profile"
+            className="w-12 h-12 rounded-full border border-gray-300 dark:border-gray-600"
+          />
         </div>
         <div className="flex-1">
           <div className="mb-2">
             <span className="font-bold mr-2">{username}</span>
-            <span className="text-gray-500 text-sm">{time}</span>
+            <span className="text-gray-500 dark:text-gray-400 text-sm">
+              {time}
+            </span>
           </div>
           <p className="mb-2 break-words">{content}</p>
           {image && (
@@ -60,15 +66,15 @@ function Post({ username, content, image, time, initialLikes }) {
               className="w-full h-auto object-cover mb-2 rounded"
             />
           )}
-          <div className="flex gap-4 text-gray-500 text-sm sm:text-base">
+          <div className="flex gap-4 text-gray-500 dark:text-gray-400 text-sm sm:text-base">
             <div className="flex items-center">
-              <button onClick={handleLike}>
+              <button onClick={handleLike} aria-label="Like post">
                 {liked ? <AiFillHeart className="text-red-500" /> : <CiHeart />}
               </button>
               <span className="ml-1">{likes}</span>
             </div>
             <div className="flex items-center">
-              <button onClick={handleCommentClick}>
+              <button onClick={handleCommentClick} aria-label="Show comments">
                 <LuMessageSquareMore />
               </button>
             </div>
@@ -76,7 +82,10 @@ function Post({ username, content, image, time, initialLikes }) {
               <HiRefresh />
             </div>
             <div className="flex items-center">
-              <button onClick={() => setShowReplies(!showReplies)}>
+              <button
+                onClick={() => setShowReplies(!showReplies)}
+                aria-label="Toggle replies"
+              >
                 <FaCaretDown />
               </button>
             </div>
@@ -88,17 +97,21 @@ function Post({ username, content, image, time, initialLikes }) {
         <div className="ml-16 mt-4 space-y-3">
           <div className="space-y-2">
             {comments.length === 0 ? (
-              <p className="text-sm text-gray-500">No replies yet.</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                No replies yet.
+              </p>
             ) : (
               comments.map((comment, index) => (
                 <div
                   key={index}
-                  className="bg-gray-50 border border-gray-100 p-2 rounded-lg"
+                  className="bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 p-2 rounded-lg"
                 >
-                  <p className="text-sm font-medium text-gray-700">
+                  <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
                     {comment.user}
                   </p>
-                  <p className="text-sm text-gray-600">{comment.text}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    {comment.text}
+                  </p>
                 </div>
               ))
             )}
@@ -109,11 +122,12 @@ function Post({ username, content, image, time, initialLikes }) {
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Add a reply..."
-              className="flex-1 p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-colors duration-300"
             />
             <button
               onClick={handleAddComment}
-              className="text-gray-600 hover:text-blue-600"
+              className="text-gray-600 dark:text-gray-400 hover:text-blue-600"
+              aria-label="Add reply"
             >
               <FaPaperPlane />
             </button>
@@ -123,45 +137,53 @@ function Post({ username, content, image, time, initialLikes }) {
 
       {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl w-11/12 max-w-md max-h-[80vh] flex flex-col">
-            <div className="flex justify-between items-center p-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-800">Comments</h3>
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-xl w-11/12 max-w-md max-h-[80vh] flex flex-col">
+            <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                Comments
+              </h3>
               <button
                 onClick={() => setShowPopup(false)}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                aria-label="Close comments popup"
               >
                 <FaTimes />
               </button>
             </div>
             <div className="flex-1 p-4 overflow-y-auto">
               {comments.length === 0 ? (
-                <p className="text-gray-500 text-center">No comments yet.</p>
+                <p className="text-gray-500 dark:text-gray-400 text-center">
+                  No comments yet.
+                </p>
               ) : (
                 comments.map((comment, index) => (
                   <div
                     key={index}
-                    className="mb-3 p-3 bg-gray-50 rounded-lg border border-gray-100"
+                    className="mb-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700"
                   >
-                    <p className="text-sm font-medium text-gray-700">
+                    <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
                       {comment.user}
                     </p>
-                    <p className="text-sm text-gray-600">{comment.text}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      {comment.text}
+                    </p>
                   </div>
                 ))
               )}
             </div>
-            <div className="p-4 border-t border-gray-200">
+            <div className="p-4 border-t border-gray-200 dark:border-gray-700">
               <div className="flex items-center gap-2">
                 <input
                   type="text"
                   placeholder="Add a comment..."
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
-                  className="flex-1 p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex-1 p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-colors duration-300"
                 />
                 <button
                   onClick={handleAddComment}
-                  className="p-2 text-gray-600 hover:text-blue-600"
+                  className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600"
+                  aria-label="Add comment"
                 >
                   <FaPaperPlane />
                 </button>
@@ -210,8 +232,8 @@ function Community() {
   };
 
   return (
-    <div className="flex w-full">
-      <div className="w-64">
+    <div className="flex w-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+      <div className="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
         <Sidebar />
       </div>
       <main className="flex-1 p-4">
@@ -220,9 +242,8 @@ function Community() {
             <h1 className="text-[#C10201] text-2xl lg:text-3xl font-semibold">
               Welcome Jackson...
             </h1>
-            <div className="lg:ml-28 mt-2 lg:mt-0 flex gap-8 text-[#29272780] font-semibold">
+            <div className="lg:ml-28 mt-2 lg:mt-0 flex gap-8 text-[#29272780] dark:text-[#fff6] font-semibold">
               <Link to="/">
-                {" "}
                 <a
                   href="#"
                   className="relative inline-block font-bold hover:text-red-700 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-700 after:transition-all after:duration-300 hover:after:w-full"
@@ -244,9 +265,9 @@ function Community() {
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-colors duration-300"
                 />
-                <FaSearch className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500" />
+                <FaSearch className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400" />
               </div>
             </Link>
           </div>
@@ -257,15 +278,15 @@ function Community() {
             <img
               src={profile1}
               alt="Profile"
-              className="w-12 h-12 rounded-full mr-4"
+              className="w-12 h-12 rounded-full mr-4 border border-gray-300 dark:border-gray-600"
             />
-            <div className="flex items-center w-full border rounded px-3 py-2 relative">
+            <div className="flex items-center w-full border rounded px-3 py-2 relative border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-300">
               <input
                 type="text"
                 placeholder="Share something cool today"
-                className="w-full outline-none"
+                className="w-full outline-none bg-transparent placeholder-gray-400 dark:placeholder-gray-500"
               />
-              <div className="cursor-pointer text-gray-600 hover:text-gray-800 ml-2">
+              <div className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 ml-2">
                 <FaPaperPlane />
               </div>
             </div>
@@ -273,7 +294,7 @@ function Community() {
           <div className="ml-16 flex items-center">
             <label
               htmlFor="file-upload"
-              className="cursor-pointer text-gray-600 hover:text-gray-800 mr-2"
+              className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 mr-2"
             >
               <GrAttachment />
             </label>
@@ -284,7 +305,7 @@ function Community() {
               onChange={handleFileChange}
             />
             {selectedFileName && (
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-gray-600 dark:text-gray-400">
                 Selected file:{" "}
                 <span className="font-medium">{selectedFileName}</span>
               </span>
@@ -303,7 +324,7 @@ function Community() {
           />
         ))}
       </main>
-      <aside className="hidden lg:block w-64">
+      <aside className="hidden lg:block w-64 bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-700">
         <Trending />
       </aside>
     </div>

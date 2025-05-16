@@ -24,16 +24,15 @@ const headerBgColors = [
 ];
 
 const Tamplets = () => {
-  const [selectedColor, setSelectedColor] = useState("#b91c1c");
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
   return (
     <>
       <div className="flex justify-between items-center mb-4 font-montserrat">
-        <h2 className="text-3xl font-semibold mt-6 ml-8">Templets</h2>
+        <h2 className="text-3xl font-semibold mt-6 ml-8 text-gray-900 dark:text-gray-100">
+          Templets
+        </h2>
       </div>
 
-      <section className="p-20 font-montserrat">
+      <section className="p-10 md:p-20 font-montserrat bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {templateImages.map((src, idx) => {
             const borderColor = borderColors[idx % borderColors.length];
@@ -42,7 +41,7 @@ const Tamplets = () => {
             return (
               <div
                 key={idx}
-                className={`border-8 ${borderColor} rounded-lg overflow-hidden shadow-md bg-white`}
+                className={`border-8 ${borderColor} rounded-lg overflow-hidden shadow-md bg-white dark:bg-gray-800 transition-colors duration-300`}
               >
                 <div
                   className={`text-white text-center py-2 text-sm font-semibold ${headerColor}`}

@@ -1,45 +1,60 @@
 import React, { useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 import Visa_card from "../assets/Visa_card.png";
 import Sidebar from "./SideBar";
 
 function GiftSeekfully() {
+  const navigate = useNavigate();
+
   const [isRecurring, setIsRecurring] = useState(false);
   const [amount, setAmount] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("Paypal");
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-white font-montserrat">
+    <div className="flex min-h-screen bg-white dark:bg-gray-900 font-montserrat transition-colors duration-300">
       {/* Sidebar */}
-      <div className="w-64">
+      <div className="w-64 bg-white dark:bg-gray-800">
         <Sidebar />
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-6">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">
-          Gift Seekfully
-        </h2>
+      <div className="flex-1 p-6 text-gray-800 dark:text-gray-100">
+        {/* Back Button and Heading */}
+        <div className="flex items-center mb-6">
+          <button
+            onClick={() => navigate(-1)}
+            className="text-red-600 hover:text-red-700 transition mr-3 text-2xl flex items-center gap-3"
+            aria-label="Go back"
+          >
+            <IoMdArrowRoundBack />
+            <h2 className="text-2xl font-bold">Gift Seekfully</h2>
+          </button>
+        </div>
 
         {/* Amount Input */}
-        <label className="block mb-2 font-medium text-gray-700">Amount</label>
+        <label className="block mb-2 font-medium text-gray-700 dark:text-gray-300">
+          Amount
+        </label>
         <input
           type="number"
           placeholder="$0"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-red-400"
+          className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-red-400"
         />
 
         {/* Recurring Toggle */}
-        <div className="flex justify-between items-center p-3 border border-gray-300 rounded-lg mb-6">
-          <span className="text-gray-700 font-medium">Recurring</span>
+        <div className="flex justify-between items-center p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-lg mb-6">
+          <span className="text-gray-700 dark:text-gray-300 font-medium">
+            Recurring
+          </span>
           <div
             onClick={() => setIsRecurring(!isRecurring)}
             className={`w-14 h-8 rounded-full p-1 flex items-center cursor-pointer transition-colors duration-300 ${
-              isRecurring ? "bg-red-500" : "bg-gray-300"
+              isRecurring ? "bg-red-500" : "bg-gray-300 dark:bg-gray-600"
             }`}
           >
             <div
@@ -51,18 +66,20 @@ function GiftSeekfully() {
         </div>
 
         {/* Payment Methods */}
-        <h3 className="font-medium text-gray-700 mb-2">Payment Method</h3>
+        <h3 className="font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Payment Method
+        </h3>
         {["Paypal", "Card"].map((method) => (
           <div
             key={method}
             className={`flex justify-between items-center border p-3 rounded-lg mb-2 cursor-pointer transition ${
               paymentMethod === method
-                ? "border-red-500 bg-red-50"
-                : "border-gray-300"
+                ? "border-red-500 bg-red-50 dark:bg-red-900/30"
+                : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
             }`}
             onClick={() => setPaymentMethod(method)}
           >
-            <span className="text-gray-700">{method}</span>
+            <span className="text-gray-700 dark:text-gray-200">{method}</span>
             <input type="radio" checked={paymentMethod === method} readOnly />
           </div>
         ))}
@@ -85,8 +102,8 @@ function GiftSeekfully() {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-2xl shadow-2xl p-6 w-[90%] max-w-lg">
+        <div className="fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-70 flex justify-center items-center z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 w-[90%] max-w-lg text-gray-800 dark:text-gray-100">
             <div className="flex items-center mb-6">
               <button
                 onClick={() => setShowModal(false)}
@@ -120,33 +137,33 @@ function GiftSeekfully() {
             </div>
 
             {/* Card Form */}
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Card Number
             </label>
             <input
               type="number"
               placeholder="1234 **** **** ****"
-              className="w-full p-3 border border-gray-300 rounded-lg mb-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-red-400"
+              className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-red-400"
             />
 
             <div className="flex gap-4">
               <div className="w-1/2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   CVV
                 </label>
                 <input
                   type="text"
                   placeholder="Enter CVV"
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
                 />
               </div>
               <div className="w-1/2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Expiry Date
                 </label>
                 <input
                   type="date"
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
                 />
               </div>
             </div>
