@@ -6,3 +6,6 @@
 .btn {
   @apply px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700 transition;
 }
+html.dark {
+  background-color: #0f172a; /* or any dark bg */
+}
