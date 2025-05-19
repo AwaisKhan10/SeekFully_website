@@ -1,8 +1,9 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import Sidebar from "./SideBar";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
+
 const LexiconDetail = () => {
   const books = {
     "Old Testament": [
@@ -40,6 +41,27 @@ const LexiconDetail = () => {
   const [chapterSearch, setChapterSearch] = useState("");
   const [verseSearch, setVerseSearch] = useState("");
   const [bookSearch, setBookSearch] = useState("");
+  const [darkMode, setDarkMode] = useState(() => {
+    // Default to system preference or false
+    if (typeof window !== "undefined") {
+      return (
+        localStorage.getItem("theme") === "dark" ||
+        (!localStorage.getItem("theme") &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      );
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
 
   const chapters = Array.from({ length: totalChapters }, (_, i) => i + 1);
   const verses = Array.from({ length: totalVerses }, (_, i) => i + 1);
@@ -58,17 +80,27 @@ const LexiconDetail = () => {
     );
 
   return (
-    <div className="flex bg-[#f9f9f9] min-h-screen  font-montserrat">
+    <div className="flex min-h-screen font-montserrat bg-gray-50 dark:bg-gray-900">
       {/* Sidebar */}
-      <aside className="w-20 bg-white shadow-md flex flex-col items-center py-4 fixed h-full z-10">
+      <aside className="w-20 bg-white dark:bg-gray-800 shadow-md flex flex-col items-center py-4 fixed h-full z-10">
         <Sidebar />
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 ml-40 flex justify-center items-start px-4">
-        <div className="p-6 w-full">
+      <main className="flex-1 ml-20 md:ml-40 flex justify-center items-start px-4">
+        <div className="p-6 w-full max-w-7xl">
+          {/* Dark Mode Toggle */}
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition"
+            >
+              {darkMode ? "Light Mode" : "Dark Mode"}
+            </button>
+          </div>
+
           {/* Header */}
-          <div className="relative flex items-center text-sm font-normal text-gray-700 mb-6 select-none">
+          <div className="relative flex items-center text-sm font-normal text-gray-700 dark:text-gray-300 mb-6 select-none">
             <button className="flex items-center space-x-1 hover:underline">
               <i className="fas fa-arrow-left"></i>
               <Link to="/study-interlinear">
@@ -89,12 +121,14 @@ const LexiconDetail = () => {
             <input
               type="search"
               placeholder="Search"
-              className="flex-grow border border-red-100 rounded-md px-4 py-2 text-sm placeholder:text-gray-300 focus:outline-none focus:ring-1 focus:ring-red-300"
+              className="flex-grow border border-red-100 rounded-md px-4 py-2 text-sm placeholder:text-gray-400 dark:placeholder:text-gray-500
+                text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-700
+                focus:outline-none focus:ring-1 focus:ring-red-300"
             />
 
             {/* Book Dropdown */}
             <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
+              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-1 focus:ring-red-300">
                 Index
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -107,26 +141,32 @@ const LexiconDetail = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute z-20 mt-2 w-96 bg-white shadow-lg rounded-md p-4 text-sm grid grid-cols-2 gap-x-6">
+                <Menu.Items className="absolute z-20 mt-2 w-96 bg-white dark:bg-gray-800 shadow-lg rounded-md p-4 text-sm grid grid-cols-2 gap-x-6">
                   <div className="col-span-2 mb-2">
                     <input
                       type="text"
                       placeholder="Search"
                       value={bookSearch}
                       onChange={(e) => setBookSearch(e.target.value)}
-                      className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-red-300"
+                      className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-1 text-sm text-gray-800 dark:text-gray-200
+                        bg-white dark:bg-gray-700
+                        focus:outline-none focus:ring-1 focus:ring-red-300"
                     />
                   </div>
                   {["Old Testament", "New Testament"].map((section) => (
                     <div key={section}>
-                      <h4 className="font-semibold mb-1">{section}</h4>
+                      <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">
+                        {section}
+                      </h4>
                       <ul className="space-y-1">
                         {filterBooks(section).map((book) => (
                           <Menu.Item key={book}>
                             {({ active }) => (
                               <button
                                 className={`w-full text-left ${
-                                  active ? "text-red-500" : "text-gray-700"
+                                  active
+                                    ? "text-red-500"
+                                    : "text-gray-700 dark:text-gray-300"
                                 }`}
                               >
                                 {book}
@@ -143,7 +183,7 @@ const LexiconDetail = () => {
 
             {/* Chapter Dropdown */}
             <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
+              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-1 focus:ring-red-300">
                 Chapter
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -157,8 +197,8 @@ const LexiconDetail = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white shadow-lg rounded-md p-4 text-sm">
-                  <div className="text-center font-semibold text-lg mb-3">
+                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white dark:bg-gray-800 shadow-lg rounded-md p-4 text-sm">
+                  <div className="text-center font-semibold text-lg mb-3 text-gray-900 dark:text-gray-100">
                     Chapter
                   </div>
                   <input
@@ -166,10 +206,14 @@ const LexiconDetail = () => {
                     placeholder="Search"
                     value={chapterSearch}
                     onChange={(e) => setChapterSearch(e.target.value)}
-                    className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm mb-4 focus:outline-none focus:ring-1 focus:ring-red-300"
+                    className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-1 text-sm mb-4 text-gray-800 dark:text-gray-200
+                      bg-white dark:bg-gray-700
+                      focus:outline-none focus:ring-1 focus:ring-red-300"
                   />
-                  <div className="mb-2 text-sm">
-                    <span className="text-gray-500">Book</span>{" "}
+                  <div className="mb-2 text-sm text-gray-700 dark:text-gray-300">
+                    <span className="text-gray-500 dark:text-gray-400">
+                      Book
+                    </span>{" "}
                     <span className="font-semibold">Jeremiah</span>
                   </div>
                   <div className="grid grid-cols-6 gap-2">
@@ -180,7 +224,7 @@ const LexiconDetail = () => {
                             className={`w-full py-1 rounded-md text-center text-sm font-medium ${
                               active
                                 ? "bg-red-100 text-red-600"
-                                : "bg-gray-100 text-gray-700"
+                                : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
                             }`}
                           >
                             {ch}
@@ -195,7 +239,7 @@ const LexiconDetail = () => {
 
             {/* Verse Dropdown */}
             <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
+              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-1 focus:ring-red-300">
                 Verse
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -209,8 +253,8 @@ const LexiconDetail = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white shadow-lg rounded-md p-4 text-sm">
-                  <div className="text-center font-semibold text-lg mb-3">
+                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white dark:bg-gray-800 shadow-lg rounded-md p-4 text-sm">
+                  <div className="text-center font-semibold text-lg mb-3 text-gray-900 dark:text-gray-100">
                     Verse
                   </div>
                   <input
@@ -218,10 +262,14 @@ const LexiconDetail = () => {
                     placeholder="Search"
                     value={verseSearch}
                     onChange={(e) => setVerseSearch(e.target.value)}
-                    className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm mb-4 focus:outline-none focus:ring-1 focus:ring-red-300"
+                    className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-1 text-sm mb-4 text-gray-800 dark:text-gray-200
+                      bg-white dark:bg-gray-700
+                      focus:outline-none focus:ring-1 focus:ring-red-300"
                   />
-                  <div className="mb-2 text-sm">
-                    <span className="text-gray-500">Chapter</span>{" "}
+                  <div className="mb-2 text-sm text-gray-700 dark:text-gray-300">
+                    <span className="text-gray-500 dark:text-gray-400">
+                      Chapter
+                    </span>{" "}
                     <span className="font-semibold">30</span>
                   </div>
                   <div className="grid grid-cols-6 gap-2">
@@ -232,7 +280,7 @@ const LexiconDetail = () => {
                             className={`w-full py-1 rounded-md text-center text-sm font-medium ${
                               active
                                 ? "bg-red-100 text-red-600"
-                                : "bg-gray-100 text-gray-700"
+                                : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
                             }`}
                           >
                             {v}
@@ -271,58 +319,116 @@ const LexiconDetail = () => {
 
           {/* Lexical Table */}
           <div className="overflow-x-auto mt-6">
-            <table className="min-w-full text-sm text-left border border-gray-300">
-              <thead className="bg-gray-100 text-2xl text-gray-800">
+            <table className="min-w-full text-sm text-left border border-gray-300 dark:border-gray-700">
+              <thead className="bg-gray-100 dark:bg-gray-700 text-2xl text-gray-800 dark:text-gray-200">
                 <tr>
-                  <th className="px-4 py-2 border">Strong's Number</th>
-                  <th className="px-4 py-2 border">Hebrew</th>
-                  <th className="px-4 py-2 border">Greek</th>
-                  <th className="px-4 py-2 border">Transliterated</th>
-                  <th className="px-4 py-2 border">English Equivalent</th>
+                  <th className="px-4 py-2 border dark:border-gray-700">
+                    Strong's Number
+                  </th>
+                  <th className="px-4 py-2 border dark:border-gray-700">
+                    Hebrew
+                  </th>
+                  <th className="px-4 py-2 border dark:border-gray-700">
+                    Greek
+                  </th>
+                  <th className="px-4 py-2 border dark:border-gray-700">
+                    Transliterated
+                  </th>
+                  <th className="px-4 py-2 border dark:border-gray-700">
+                    English Equivalent
+                  </th>
                 </tr>
               </thead>
-              <tbody className="text-lg">
-                <tr className="border-t ">
-                  <td className="px-4 py-2 border">G3114</td>
-                  <td className="px-4 py-2 border">-</td>
-                  <td className="px-4 py-2 border">μακροθυμεῖ</td>
-                  <td className="px-4 py-2 border">makrothymei</td>
-                  <td className="px-4 py-2 border">is patient</td>
+              <tbody className="text-lg text-gray-900 dark:text-gray-300">
+                <tr className="border-t border-gray-300 dark:border-gray-700">
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    G3114
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">-</td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    μακροθυμεῖ
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    makrothymei
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    is patient
+                  </td>
                 </tr>
-                <tr className="border-t">
-                  <td className="px-4 py-2 border">G5541</td>
-                  <td className="px-4 py-2 border">-</td>
-                  <td className="px-4 py-2 border">χρηστεύεται</td>
-                  <td className="px-4 py-2 border">chrēsteuetai</td>
-                  <td className="px-4 py-2 border">is kind</td>
+                <tr className="border-t border-gray-300 dark:border-gray-700">
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    G5541
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">-</td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    χρηστεύεται
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    chrēsteuetai
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    is kind
+                  </td>
                 </tr>
-                <tr className="border-t">
-                  <td className="px-4 py-2 border">G2206</td>
-                  <td className="px-4 py-2 border">-</td>
-                  <td className="px-4 py-2 border">ζηλοῖ</td>
-                  <td className="px-4 py-2 border">zēloi</td>
-                  <td className="px-4 py-2 border">envies</td>
+                <tr className="border-t border-gray-300 dark:border-gray-700">
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    G2206
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">-</td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    ζηλοῖ
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    zēloi
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    envies
+                  </td>
                 </tr>
-                <tr className="border-t">
-                  <td className="px-4 py-2 border">G4068</td>
-                  <td className="px-4 py-2 border">-</td>
-                  <td className="px-4 py-2 border">περπερεύεται</td>
-                  <td className="px-4 py-2 border">perpereuetai</td>
-                  <td className="px-4 py-2 border">boasts</td>
+                <tr className="border-t border-gray-300 dark:border-gray-700">
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    G4068
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">-</td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    περπερεύεται
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    perpereuetai
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    boasts
+                  </td>
                 </tr>
-                <tr className="border-t">
-                  <td className="px-4 py-2 border">G5448</td>
-                  <td className="px-4 py-2 border">-</td>
-                  <td className="px-4 py-2 border">φυσιούται</td>
-                  <td className="px-4 py-2 border">physioutai</td>
-                  <td className="px-4 py-2 border">is proud</td>
+                <tr className="border-t border-gray-300 dark:border-gray-700">
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    G2718
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">-</td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    φυσιῶται
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    physiōtai
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    is proud
+                  </td>
                 </tr>
-                <tr className="border-t">
-                  <td className="px-4 py-2 border">G807</td>
-                  <td className="px-4 py-2 border">-</td>
-                  <td className="px-4 py-2 border">ἀσχημονεῖ</td>
-                  <td className="px-4 py-2 border">aschēmonei</td>
-                  <td className="px-4 py-2 border">dishonor</td>
+                <tr className="border-t border-gray-300 dark:border-gray-700">
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    G2695
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">-</td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    ἀσχημονεῖ
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    aschēmonei
+                  </td>
+                  <td className="px-4 py-2 border dark:border-gray-700">
+                    does not behave itself unseemly
+                  </td>
                 </tr>
               </tbody>
             </table>

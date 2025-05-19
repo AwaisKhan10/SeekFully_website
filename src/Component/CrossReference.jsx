@@ -1,8 +1,9 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import Sidebar from "./SideBar";
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { ChevronDownIcon, SunIcon, MoonIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
+
 const CrossReference = () => {
   const books = {
     "Old Testament": [
@@ -40,6 +41,28 @@ const CrossReference = () => {
   const [chapterSearch, setChapterSearch] = useState("");
   const [verseSearch, setVerseSearch] = useState("");
   const [bookSearch, setBookSearch] = useState("");
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      return (
+        localStorage.getItem("theme") === "dark" ||
+        (!localStorage.getItem("theme") &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      );
+    }
+    return false;
+  });
+
+  // Sync dark mode class on html and localStorage
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (isDarkMode) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDarkMode]);
 
   const chapters = Array.from({ length: totalChapters }, (_, i) => i + 1);
   const verses = Array.from({ length: totalVerses }, (_, i) => i + 1);
@@ -58,17 +81,32 @@ const CrossReference = () => {
     );
 
   return (
-    <div className="flex bg-[#f9f9f9] min-h-screen font-montserrat">
+    <div className="flex bg-[#f9f9f9] dark:bg-gray-900 min-h-screen font-montserrat text-gray-900 dark:text-gray-100">
       {/* Sidebar */}
-      <aside className="w-20 bg-white shadow-md flex flex-col items-center py-4 fixed h-full z-10">
+      <aside className="w-20 bg-white dark:bg-gray-800 shadow-md flex flex-col items-center py-4 fixed h-full z-10">
         <Sidebar />
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 ml-20 flex justify-center items-start px-4">
-        <div className="p-6 w-full">
+      <main className="flex-1 ml-20 flex flex-col justify-start items-center px-4 py-6">
+        {/* Dark Mode Toggle */}
+        <div className="w-full flex justify-end mb-4">
+          <button
+            onClick={() => setIsDarkMode(!isDarkMode)}
+            aria-label="Toggle Dark Mode"
+            className="p-2 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+          >
+            {isDarkMode ? (
+              <SunIcon className="w-6 h-6" />
+            ) : (
+              <MoonIcon className="w-6 h-6" />
+            )}
+          </button>
+        </div>
+
+        <div className="p-6 w-full max-w-7xl">
           {/* Header */}
-          <div className="relative flex items-center text-sm font-normal text-gray-700 mb-6 select-none">
+          <div className="relative flex items-center text-sm font-normal text-gray-700 dark:text-gray-300 mb-6 select-none">
             <button className="flex items-center space-x-1 hover:underline">
               <i className="fas fa-arrow-left"></i>
               <Link to="/study-interlinear">
@@ -89,12 +127,12 @@ const CrossReference = () => {
             <input
               type="search"
               placeholder="Search"
-              className="flex-grow border border-red-100 rounded-md px-4 py-2 text-sm placeholder:text-gray-300 focus:outline-none focus:ring-1 focus:ring-red-300"
+              className="flex-grow border border-red-100 dark:border-red-700 rounded-md px-4 py-2 text-sm placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             />
 
             {/* Book Dropdown */}
             <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
+              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-700 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-600">
                 Index
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -107,14 +145,14 @@ const CrossReference = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute z-20 mt-2 w-96 bg-white shadow-lg rounded-md p-4 text-sm grid grid-cols-2 gap-x-6">
+                <Menu.Items className="absolute z-20 mt-2 w-96 bg-white dark:bg-gray-800 shadow-lg rounded-md p-4 text-sm grid grid-cols-2 gap-x-6">
                   <div className="col-span-2 mb-2">
                     <input
                       type="text"
                       placeholder="Search"
                       value={bookSearch}
                       onChange={(e) => setBookSearch(e.target.value)}
-                      className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-red-300"
+                      className="w-full border border-gray-300 dark:border-gray-700 rounded-md px-3 py-1 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-600"
                     />
                   </div>
                   {["Old Testament", "New Testament"].map((section) => (
@@ -125,8 +163,10 @@ const CrossReference = () => {
                           <Menu.Item key={book}>
                             {({ active }) => (
                               <button
-                                className={`w-full text-left ${
-                                  active ? "text-red-500" : "text-gray-700"
+                                className={`w-full text-left rounded px-1 py-0.5 ${
+                                  active
+                                    ? "text-red-500 bg-red-50 dark:bg-red-900"
+                                    : "text-gray-700 dark:text-gray-300"
                                 }`}
                               >
                                 {book}
@@ -143,7 +183,7 @@ const CrossReference = () => {
 
             {/* Chapter Dropdown */}
             <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
+              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-700 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-600">
                 Chapter
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -157,7 +197,7 @@ const CrossReference = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white shadow-lg rounded-md p-4 text-sm">
+                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white dark:bg-gray-800 shadow-lg rounded-md p-4 text-sm">
                   <div className="text-center font-semibold text-lg mb-3">
                     Chapter
                   </div>
@@ -166,10 +206,10 @@ const CrossReference = () => {
                     placeholder="Search"
                     value={chapterSearch}
                     onChange={(e) => setChapterSearch(e.target.value)}
-                    className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm mb-4 focus:outline-none focus:ring-1 focus:ring-red-300"
+                    className="w-full border border-gray-300 dark:border-gray-700 rounded-md px-3 py-1 text-sm mb-4 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-600"
                   />
-                  <div className="mb-2 text-sm">
-                    <span className="text-gray-500">Book</span>{" "}
+                  <div className="mb-2 text-sm text-gray-600 dark:text-gray-400">
+                    <span>Book</span>{" "}
                     <span className="font-semibold">Jeremiah</span>
                   </div>
                   <div className="grid grid-cols-6 gap-2">
@@ -179,8 +219,8 @@ const CrossReference = () => {
                           <button
                             className={`w-full py-1 rounded-md text-center text-sm font-medium ${
                               active
-                                ? "bg-red-100 text-red-600"
-                                : "bg-gray-100 text-gray-700"
+                                ? "bg-red-100 text-red-600 dark:bg-red-900"
+                                : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
                             }`}
                           >
                             {ch}
@@ -195,7 +235,7 @@ const CrossReference = () => {
 
             {/* Verse Dropdown */}
             <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
+              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-700 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-600">
                 Verse
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -209,7 +249,7 @@ const CrossReference = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white shadow-lg rounded-md p-4 text-sm">
+                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white dark:bg-gray-800 shadow-lg rounded-md p-4 text-sm">
                   <div className="text-center font-semibold text-lg mb-3">
                     Verse
                   </div>
@@ -218,10 +258,10 @@ const CrossReference = () => {
                     placeholder="Search"
                     value={verseSearch}
                     onChange={(e) => setVerseSearch(e.target.value)}
-                    className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm mb-4 focus:outline-none focus:ring-1 focus:ring-red-300"
+                    className="w-full border border-gray-300 dark:border-gray-700 rounded-md px-3 py-1 text-sm mb-4 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-600"
                   />
-                  <div className="mb-2 text-sm">
-                    <span className="text-gray-500">Chapter</span>{" "}
+                  <div className="mb-2 text-sm text-gray-600 dark:text-gray-400">
+                    <span>Chapter</span>{" "}
                     <span className="font-semibold">30</span>
                   </div>
                   <div className="grid grid-cols-6 gap-2">
@@ -231,8 +271,8 @@ const CrossReference = () => {
                           <button
                             className={`w-full py-1 rounded-md text-center text-sm font-medium ${
                               active
-                                ? "bg-red-100 text-red-600"
-                                : "bg-gray-100 text-gray-700"
+                                ? "bg-red-100 text-red-600 dark:bg-red-900"
+                                : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
                             }`}
                           >
                             {v}
@@ -275,7 +315,7 @@ const CrossReference = () => {
           </h1>
 
           {/* Verses */}
-          <div className="text-xl leading-5 text-gray-900 select-text space-y-6">
+          <div className="text-xl leading-5 text-gray-900 dark:text-gray-100 select-text space-y-6">
             <p>1. In the beginning God created the heavens and the earth.</p>
             <p>
               2. Now the earth was formless and empty, darkness was over the

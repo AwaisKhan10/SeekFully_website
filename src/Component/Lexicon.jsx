@@ -58,9 +58,9 @@ const Lexicon = () => {
     );
 
   return (
-    <div className="flex bg-[#f9f9f9] min-h-screen font-montserrat">
+    <div className="flex bg-[#f9f9f9] dark:bg-gray-950 min-h-screen font-montserrat transition-colors duration-300">
       {/* Sidebar */}
-      <aside className="w-20 bg-white shadow-md flex flex-col items-center py-4 fixed h-full">
+      <aside className="w-20 bg-white dark:bg-gray-900 shadow-md flex flex-col items-center py-4 fixed h-full">
         <Sidebar />
       </aside>
 
@@ -68,7 +68,7 @@ const Lexicon = () => {
       <main className="flex-1 ml-40 flex justify-center items-start px-4">
         <div className="p-6 w-full">
           {/* Header */}
-          <div className="relative flex items-center text-sm font-normal text-gray-700 mb-6 select-none">
+          <div className="relative flex items-center text-sm font-normal text-gray-700 dark:text-gray-300 mb-6 select-none">
             <button className="flex items-center space-x-1 hover:underline">
               <i className="fas fa-arrow-left"></i>
               <Link to="/study-interlinear">
@@ -77,14 +77,14 @@ const Lexicon = () => {
               </Link>
             </button>
             <div className="absolute left-1/2 transform -translate-x-1/2 flex space-x-6">
-              <button className="text-red-600 font-semibold border-b-2 border-red-600 pb-1">
+              <button className="text-red-600 dark:text-red-400 font-semibold border-b-2 border-red-600 dark:border-red-400 pb-1">
                 Study
               </button>
               <button className="text-gray-300 cursor-default select-none">
                 Study Note
               </button>
             </div>
-            <div className="ml-auto flex items-center space-x-1 text-gray-400 text-xs cursor-default select-none">
+            <div className="ml-auto flex items-center space-x-1 text-gray-400 dark:text-gray-500 text-xs cursor-default select-none">
               <i className="far fa-clock"></i>
               <span>KJV</span>
               <i className="fas fa-chevron-down text-xs"></i>
@@ -96,12 +96,12 @@ const Lexicon = () => {
             <input
               type="search"
               placeholder="Search"
-              className="flex-grow border border-red-100 rounded-md px-4 py-2 text-sm placeholder:text-gray-300 focus:outline-none focus:ring-1 focus:ring-red-300"
+              className="flex-grow border border-red-100 dark:border-red-900 bg-white dark:bg-gray-800 rounded-md px-4 py-2 text-sm placeholder:text-gray-300 dark:placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700"
             />
 
             {/* Book Dropdown */}
             <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
+              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700">
                 Index
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -114,26 +114,30 @@ const Lexicon = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute z-20 mt-2 w-96 bg-white shadow-lg rounded-md p-4 text-sm grid grid-cols-2 gap-x-6">
+                <Menu.Items className="absolute z-20 mt-2 w-96 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg rounded-md p-4 text-sm grid grid-cols-2 gap-x-6">
                   <div className="col-span-2 mb-2">
                     <input
                       type="text"
                       placeholder="Search"
                       value={bookSearch}
                       onChange={(e) => setBookSearch(e.target.value)}
-                      className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-red-300"
+                      className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md px-3 py-1 text-sm text-gray-700 dark:text-gray-200 placeholder:text-gray-300 dark:placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700"
                     />
                   </div>
                   {["Old Testament", "New Testament"].map((section) => (
                     <div key={section}>
-                      <h4 className="font-semibold mb-1">{section}</h4>
+                      <h4 className="font-semibold mb-1 text-gray-700 dark:text-gray-300">
+                        {section}
+                      </h4>
                       <ul className="space-y-1">
                         {filterBooks(section).map((book) => (
                           <Menu.Item key={book}>
                             {({ active }) => (
                               <button
                                 className={`w-full text-left ${
-                                  active ? "text-red-500" : "text-gray-700"
+                                  active
+                                    ? "text-red-500 dark:text-red-400"
+                                    : "text-gray-700 dark:text-gray-200"
                                 }`}
                               >
                                 {book}
@@ -150,7 +154,7 @@ const Lexicon = () => {
 
             {/* Chapter Dropdown */}
             <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
+              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700">
                 Chapter
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -164,8 +168,8 @@ const Lexicon = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white shadow-lg rounded-md p-4 text-sm">
-                  <div className="text-center font-semibold text-lg mb-3">
+                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg rounded-md p-4 text-sm">
+                  <div className="text-center font-semibold text-lg mb-3 text-gray-700 dark:text-gray-200">
                     Chapter
                   </div>
                   <input
@@ -173,11 +177,15 @@ const Lexicon = () => {
                     placeholder="Search"
                     value={chapterSearch}
                     onChange={(e) => setChapterSearch(e.target.value)}
-                    className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm mb-4 focus:outline-none focus:ring-1 focus:ring-red-300"
+                    className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md px-3 py-1 text-sm mb-4 text-gray-700 dark:text-gray-200 placeholder:text-gray-300 dark:placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700"
                   />
                   <div className="mb-2 text-sm">
-                    <span className="text-gray-500">Book</span>{" "}
-                    <span className="font-semibold">Jeremiah</span>
+                    <span className="text-gray-500 dark:text-gray-400">
+                      Book
+                    </span>{" "}
+                    <span className="font-semibold text-gray-800 dark:text-gray-200">
+                      Jeremiah
+                    </span>
                   </div>
                   <div className="grid grid-cols-6 gap-2">
                     {filteredChapters.map((ch) => (
@@ -186,8 +194,8 @@ const Lexicon = () => {
                           <button
                             className={`w-full py-1 rounded-md text-center text-sm font-medium ${
                               active
-                                ? "bg-red-100 text-red-600"
-                                : "bg-gray-100 text-gray-700"
+                                ? "bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300"
+                                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200"
                             }`}
                           >
                             {ch}
@@ -202,7 +210,7 @@ const Lexicon = () => {
 
             {/* Verse Dropdown */}
             <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
+              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700">
                 Verse
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -216,8 +224,8 @@ const Lexicon = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white shadow-lg rounded-md p-4 text-sm">
-                  <div className="text-center font-semibold text-lg mb-3">
+                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg rounded-md p-4 text-sm">
+                  <div className="text-center font-semibold text-lg mb-3 text-gray-700 dark:text-gray-200">
                     Verse
                   </div>
                   <input
@@ -225,11 +233,15 @@ const Lexicon = () => {
                     placeholder="Search"
                     value={verseSearch}
                     onChange={(e) => setVerseSearch(e.target.value)}
-                    className="w-full border border-gray-300 rounded-md px-3 py-1 text-sm mb-4 focus:outline-none focus:ring-1 focus:ring-red-300"
+                    className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md px-3 py-1 text-sm mb-4 text-gray-700 dark:text-gray-200 placeholder:text-gray-300 dark:placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700"
                   />
                   <div className="mb-2 text-sm">
-                    <span className="text-gray-500">Chapter</span>{" "}
-                    <span className="font-semibold">30</span>
+                    <span className="text-gray-500 dark:text-gray-400">
+                      Chapter
+                    </span>{" "}
+                    <span className="font-semibold text-gray-800 dark:text-gray-200">
+                      30
+                    </span>
                   </div>
                   <div className="grid grid-cols-6 gap-2">
                     {filteredVerses.map((v) => (
@@ -238,8 +250,8 @@ const Lexicon = () => {
                           <button
                             className={`w-full py-1 rounded-md text-center text-sm font-medium ${
                               active
-                                ? "bg-red-100 text-red-600"
-                                : "bg-gray-100 text-gray-700"
+                                ? "bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300"
+                                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200"
                             }`}
                           >
                             {v}
@@ -277,12 +289,12 @@ const Lexicon = () => {
           </div>
 
           {/* Chapter Title */}
-          <h1 className="text-2xl font-semibold mb-3 select-text">
+          <h1 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100 select-text">
             Jeremiah 30
           </h1>
 
           {/* Verses */}
-          <div className="text-xl leading-5 text-gray-900 select-text space-y-6">
+          <div className="text-xl leading-5 text-gray-900 dark:text-gray-200 select-text space-y-6">
             <p>1. In the beginning God created the heavens and the earth.</p>
             <p>
               2. Now the earth was formless and empty, darkness was over the
