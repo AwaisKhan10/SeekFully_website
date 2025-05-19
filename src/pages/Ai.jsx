@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import ailogo from "../assets/ailogo.png";
 import Sidebar from "../Component/SideBar";
-const [message, setMessage] = useState("");
-import { IoIosSend } from "react-icons/io";
+import { TiArrowUpThick } from "react-icons/ti";
 
 function Ai() {
+  const [message, setMessage] = useState("");
+
   return (
     <>
       <Sidebar />
@@ -31,8 +32,8 @@ function Ai() {
               placeholder="Message SeekerAI"
               className="flex-grow px-4 py-2 outline-none text-sm bg-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
             />
-            <button className="bg-red-600 p-2 text-white hover:bg-red-700">
-              <Send size={16} />
+            <button className="flex items-center bg-red-600 p-4 size-[50px] text-white hover:bg-red-700 rounded-lg transition-colors duration-200">
+              <TiArrowUpThick className="font-bold size-12" />
             </button>
           </div>
         </div>
