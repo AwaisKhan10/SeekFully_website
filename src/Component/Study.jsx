@@ -21,7 +21,7 @@ export default function NotesPage() {
         <div className="max-w-7xl mx-auto rounded-lg p-3">
           <Link
             to="/"
-            className="inline-flex items-center font-bold text-black dark:text-gray-100 text-sm font-normal mb-6 select-none"
+            className="inline-flex items-center font-bold text-black dark:text-gray-100 text-sm  mb-6 select-none"
           >
             <i className="fas fa-arrow-left mr-2"></i>
             Go Back
