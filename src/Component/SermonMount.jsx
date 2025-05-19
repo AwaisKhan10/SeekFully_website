@@ -64,14 +64,13 @@ const SermonMount = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 ml-24 flex justify-center items-start px-4">
-        <div className="p-6 w-full">
+      <main className="flex-1 ml-20 sm:ml-24 flex justify-center items-start px-2 sm:px-4">
+        <div className="p-4 sm:p-6 w-full max-w-screen-lg">
           {/* Header */}
           <div className="relative flex items-center text-sm font-normal text-gray-700 dark:text-gray-300 mb-6 select-none">
-            <button className="flex items-center space-x-1 hover:underline">
+            <button className="flex items-center space-x-1 hover:underline text-xs sm:text-sm">
               <i className="fas fa-arrow-left"></i>
               <Link to="/jeremiah">
-                {" "}
                 <span>Go Back</span>
               </Link>
             </button>
@@ -88,12 +87,12 @@ const SermonMount = () => {
             <input
               type="search"
               placeholder="Search"
-              className="flex-grow border border-red-100 dark:border-red-900 bg-white dark:bg-gray-800 rounded-md px-4 py-2 text-sm placeholder:text-gray-300 dark:placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700"
+              className="flex-grow border border-red-100 dark:border-red-900 bg-white dark:bg-gray-800 rounded-md px-3 sm:px-4 py-2 text-sm placeholder:text-gray-300 dark:placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700"
             />
 
             {/* Book Dropdown */}
-            <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700">
+            <Menu as="div" className="relative w-full sm:w-40">
+              <Menu.Button className="flex items-center justify-between w-full sm:w-40 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700">
                 Index
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -106,8 +105,8 @@ const SermonMount = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute z-20 mt-2 w-96 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg rounded-md p-4 text-sm grid grid-cols-2 gap-x-6">
-                  <div className="col-span-2 mb-2">
+                <Menu.Items className="absolute z-20 mt-2 w-full sm:w-96 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg rounded-md p-4 text-sm grid grid-cols-1 sm:grid-cols-2 gap-x-6">
+                  <div className="col-span-1 sm:col-span-2 mb-2">
                     <input
                       type="text"
                       placeholder="Search"
@@ -121,12 +120,12 @@ const SermonMount = () => {
                       <h4 className="font-semibold mb-1 text-gray-700 dark:text-gray-300">
                         {section}
                       </h4>
-                      <ul className="space-y-1">
+                      <ul className="space-y-1 max-h-48 overflow-auto">
                         {filterBooks(section).map((book) => (
                           <Menu.Item key={book}>
                             {({ active }) => (
                               <button
-                                className={`w-full text-left ${
+                                className={`w-full text-left truncate ${
                                   active
                                     ? "text-red-500 dark:text-red-400"
                                     : "text-gray-700 dark:text-gray-200"
@@ -145,8 +144,8 @@ const SermonMount = () => {
             </Menu>
 
             {/* Chapter Dropdown */}
-            <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700">
+            <Menu as="div" className="relative w-full sm:w-40">
+              <Menu.Button className="flex items-center justify-between w-full sm:w-40 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700">
                 Chapter
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -160,7 +159,7 @@ const SermonMount = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg rounded-md p-4 text-sm">
+                <Menu.Items className="absolute right-0 sm:right-auto sm:left-0 z-20 mt-2 w-full sm:w-80 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg rounded-md p-4 text-sm max-h-96 overflow-auto">
                   <div className="text-center font-semibold text-lg mb-3 text-gray-700 dark:text-gray-200">
                     Chapter
                   </div>
@@ -179,12 +178,12 @@ const SermonMount = () => {
                       Jeremiah
                     </span>
                   </div>
-                  <div className="grid grid-cols-6 gap-2">
+                  <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 max-h-60 overflow-auto">
                     {filteredChapters.map((ch) => (
                       <Menu.Item key={ch}>
                         {({ active }) => (
                           <button
-                            className={`w-full py-1 rounded-md text-center text-sm font-medium ${
+                            className={`w-full py-1 rounded-md text-center text-sm font-medium truncate ${
                               active
                                 ? "bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300"
                                 : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200"
@@ -201,8 +200,8 @@ const SermonMount = () => {
             </Menu>
 
             {/* Verse Dropdown */}
-            <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700">
+            <Menu as="div" className="relative w-full sm:w-40">
+              <Menu.Button className="flex items-center justify-between w-full sm:w-40 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700">
                 Verse
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -216,7 +215,7 @@ const SermonMount = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg rounded-md p-4 text-sm">
+                <Menu.Items className="absolute right-0 sm:right-auto sm:left-0 z-20 mt-2 w-full sm:w-80 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg rounded-md p-4 text-sm max-h-96 overflow-auto">
                   <div className="text-center font-semibold text-lg mb-3 text-gray-700 dark:text-gray-200">
                     Verse
                   </div>
@@ -235,12 +234,12 @@ const SermonMount = () => {
                       30
                     </span>
                   </div>
-                  <div className="grid grid-cols-6 gap-2">
+                  <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 max-h-60 overflow-auto">
                     {filteredVerses.map((v) => (
                       <Menu.Item key={v}>
                         {({ active }) => (
                           <button
-                            className={`w-full py-1 rounded-md text-center text-sm font-medium ${
+                            className={`w-full py-1 rounded-md text-center text-sm font-medium truncate ${
                               active
                                 ? "bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300"
                                 : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200"
@@ -257,10 +256,10 @@ const SermonMount = () => {
             </Menu>
           </div>
 
-          <div className="flex space-x-3 mb-6 select-none">
+          <div className="flex flex-col sm:flex-row sm:space-x-3 mb-6 select-none space-y-2 sm:space-y-0">
             <Link
               to="/lexicon"
-              className="flex-1 bg-gray-500 text-white rounded-md py-6 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
+              className="flex-1 bg-gray-500 text-white rounded-md py-4 sm:py-6 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
             >
               Lexicon
             </Link>
@@ -281,19 +280,18 @@ const SermonMount = () => {
           </div>
 
           {/* Chapter Title */}
-          <h1 className="text-3xl font-semibold mb-3 select-text text-gray-900 dark:text-gray-100">
+          <h1 className="text-2xl sm:text-3xl font-semibold mb-3 select-text text-gray-900 dark:text-gray-100">
             Jeremiah 30
           </h1>
 
           {/* Verses Grid */}
-          {/* ---- NEW WRAPPER ADDED HERE ---- */}
-          <div className="dark:text-white">
-            <div className="grid grid-cols-8 gap-6 mt-8 text-center text-md leading-5 select-text">
+          <div className="dark:text-white overflow-x-auto">
+            <div className="grid grid-cols-4 sm:grid-cols-8 gap-4 mt-8 text-center text-sm sm:text-md leading-5 select-text">
               {/* Row 1: Strong's numbers */}
               {Array(8)
                 .fill(0)
                 .map((_, i) => (
-                  <span key={`snum-${i}`} className="text-red-600">
+                  <span key={`snum-${i}`} className="text-red-600 truncate">
                     3780 [e]
                   </span>
                 ))}
@@ -309,7 +307,7 @@ const SermonMount = () => {
                 "tous",
                 "ochlous",
               ].map((w, i) => (
-                <span key={`trans-${i}`} className="text-red-600">
+                <span key={`trans-${i}`} className="text-red-600 truncate">
                   {w}
                 </span>
               ))}
@@ -325,7 +323,7 @@ const SermonMount = () => {
                 "τοὺς",
                 "ὄχλους",
               ].map((w, i) => (
-                <span key={`gr-${i}`}>
+                <span key={`gr-${i}`} className="truncate">
                   <strong>{w}</strong>
                 </span>
               ))}
@@ -341,43 +339,12 @@ const SermonMount = () => {
                 "The",
                 "Crowds",
               ].map((w, i) => (
-                <span key={`gl-${i}`} className="text-red-600">
-                  {w}
-                </span>
-              ))}
-
-              {/* Repeat rows 3 & 4 again */}
-              {[
-                "1 ἰδὼν",
-                "δὲ",
-                "τοὺς",
-                "ὄχλους",
-                "2 ἰδὼν",
-                "δὲ",
-                "τοὺς",
-                "ὄχλους",
-              ].map((w, i) => (
-                <span key={`gr2-${i}`}>
+                <span key={`eng-${i}`} className="truncate">
                   <strong>{w}</strong>
-                </span>
-              ))}
-              {[
-                "Having seen",
-                "Then",
-                "The",
-                "Crowds",
-                "Having seen",
-                "Then",
-                "The",
-                "Crowds",
-              ].map((w, i) => (
-                <span key={`gl2-${i}`} className="text-red-600">
-                  {w}
                 </span>
               ))}
             </div>
           </div>
-          {/* ---- END WRAPPER ---- */}
         </div>
       </main>
     </div>

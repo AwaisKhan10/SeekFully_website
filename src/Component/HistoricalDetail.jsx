@@ -3,6 +3,7 @@ import Sidebar from "./SideBar";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
+
 const HistoricalDetail = () => {
   const books = {
     "Old Testament": [
@@ -60,20 +61,19 @@ const HistoricalDetail = () => {
   return (
     <div className="flex bg-[#f9f9f9] min-h-screen font-montserrat">
       {/* Sidebar */}
-      <aside className="w-20 bg-white shadow-md flex flex-col items-center py-4 fixed h-full z-10">
+      <aside className="hidden sm:flex w-20 bg-white shadow-md flex-col items-center py-4 fixed h-full z-10">
         <Sidebar />
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 ml-20 flex justify-center items-start px-4">
-        <div className="p-6 w-full">
+      <main className="flex-1 sm:ml-20 flex justify-center items-start px-4 py-6">
+        <div className="p-4 w-full max-w-5xl">
           {/* Header */}
           <div className="relative flex items-center text-sm font-normal text-gray-700 mb-6 select-none">
             <button className="flex items-center space-x-1 hover:underline">
               <i className="fas fa-arrow-left"></i>
               <Link to="/study-interlinear">
-                {" "}
-                <span>Go Back</span>{" "}
+                <span> Go Back</span>
               </Link>
             </button>
             <div className="absolute left-1/2 transform -translate-x-1/2 flex space-x-6">
@@ -100,8 +100,8 @@ const HistoricalDetail = () => {
             />
 
             {/* Book Dropdown */}
-            <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
+            <Menu as="div" className="relative w-full sm:w-auto">
+              <Menu.Button className="flex items-center justify-between w-full sm:w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
                 Index
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -114,7 +114,7 @@ const HistoricalDetail = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute z-20 mt-2 w-96 bg-white shadow-lg rounded-md p-4 text-sm grid grid-cols-2 gap-x-6">
+                <Menu.Items className="absolute z-20 mt-2 w-full sm:w-96 bg-white shadow-lg rounded-md p-4 text-sm grid grid-cols-2 gap-x-6 max-h-96 overflow-auto">
                   <div className="col-span-2 mb-2">
                     <input
                       type="text"
@@ -127,7 +127,7 @@ const HistoricalDetail = () => {
                   {["Old Testament", "New Testament"].map((section) => (
                     <div key={section}>
                       <h4 className="font-semibold mb-1">{section}</h4>
-                      <ul className="space-y-1">
+                      <ul className="space-y-1 max-h-56 overflow-auto">
                         {filterBooks(section).map((book) => (
                           <Menu.Item key={book}>
                             {({ active }) => (
@@ -149,8 +149,8 @@ const HistoricalDetail = () => {
             </Menu>
 
             {/* Chapter Dropdown */}
-            <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
+            <Menu as="div" className="relative w-full sm:w-auto">
+              <Menu.Button className="flex items-center justify-between w-full sm:w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
                 Chapter
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -164,7 +164,7 @@ const HistoricalDetail = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white shadow-lg rounded-md p-4 text-sm">
+                <Menu.Items className="absolute right-0 z-20 mt-2 w-full sm:w-80 bg-white shadow-lg rounded-md p-4 text-sm max-h-96 overflow-auto">
                   <div className="text-center font-semibold text-lg mb-3">
                     Chapter
                   </div>
@@ -179,7 +179,7 @@ const HistoricalDetail = () => {
                     <span className="text-gray-500">Book</span>{" "}
                     <span className="font-semibold">Jeremiah</span>
                   </div>
-                  <div className="grid grid-cols-6 gap-2">
+                  <div className="grid grid-cols-6 gap-2 max-h-48 overflow-auto">
                     {filteredChapters.map((ch) => (
                       <Menu.Item key={ch}>
                         {({ active }) => (
@@ -201,8 +201,8 @@ const HistoricalDetail = () => {
             </Menu>
 
             {/* Verse Dropdown */}
-            <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
+            <Menu as="div" className="relative w-full sm:w-auto">
+              <Menu.Button className="flex items-center justify-between w-full sm:w-40 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300">
                 Verse
                 <ChevronDownIcon className="w-4 h-4 ml-2" />
               </Menu.Button>
@@ -216,7 +216,7 @@ const HistoricalDetail = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white shadow-lg rounded-md p-4 text-sm">
+                <Menu.Items className="absolute right-0 z-20 mt-2 w-full sm:w-80 bg-white shadow-lg rounded-md p-4 text-sm max-h-96 overflow-auto">
                   <div className="text-center font-semibold text-lg mb-3">
                     Verse
                   </div>
@@ -231,7 +231,7 @@ const HistoricalDetail = () => {
                     <span className="text-gray-500">Chapter</span>{" "}
                     <span className="font-semibold">30</span>
                   </div>
-                  <div className="grid grid-cols-6 gap-2">
+                  <div className="grid grid-cols-6 gap-2 max-h-48 overflow-auto">
                     {filteredVerses.map((v) => (
                       <Menu.Item key={v}>
                         {({ active }) => (
@@ -253,7 +253,7 @@ const HistoricalDetail = () => {
             </Menu>
           </div>
 
-          <div className="flex space-x-3 mb-6 select-none">
+          <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 mb-6 select-none">
             <Link
               to="/dictionary"
               className="flex-1 bg-gray-500 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
@@ -263,7 +263,7 @@ const HistoricalDetail = () => {
 
             <Link
               to="/historical-context"
-              className="flex-1 bg-red-300 text-white rounded-md py-6 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
+              className="flex-1 bg-red-300 text-white rounded-md py-2 sm:py-6 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
             >
               Historical Context
             </Link>

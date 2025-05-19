@@ -1,3 +1,4 @@
+// Updated responsive Corinthians component
 import React, { useState, Fragment } from "react";
 import Sidebar from "./SideBar";
 import { Menu, Transition } from "@headlessui/react";
@@ -59,235 +60,110 @@ const Corinthians = () => {
     );
 
   return (
-    <div className="flex bg-[#f9f9f9] dark:bg-gray-950 min-h-screen font-montserrat transition-colors duration-300">
+    <div className="flex min-h-screen bg-[#f9f9f9] font-montserrat transition-colors duration-300 dark:bg-gray-950">
       {/* Sidebar */}
-      <aside className="w-20 bg-white dark:bg-gray-900 shadow-md flex flex-col items-center py-4 fixed h-full z-10">
+      <aside className="fixed left-0 top-0 z-10 flex h-full w-16 flex-col items-center bg-white py-4 shadow-md dark:bg-gray-900 sm:w-20">
         <Sidebar />
       </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 ml-20 flex justify-center items-start px-4">
-        <div className="p-6 w-full">
+      {/* Main */}
+      <main className="ml-16 flex-1 px-2 pt-4 sm:ml-20 sm:px-4 md:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-7xl">
           {/* Header */}
-          <div className="relative flex items-center text-sm font-normal text-gray-700 dark:text-gray-300 mb-6 select-none">
+          <div className="relative mb-6 flex items-center select-none text-sm font-normal text-gray-700 dark:text-gray-300">
             <button className="flex items-center space-x-1 hover:underline">
-              <i className="fas fa-arrow-left"></i>
+              <i className="fas fa-arrow-left" />
               <Link to="/study-interlinear">
-                {" "}
-                <span>Go Back</span>{" "}
+                <span>Go Back</span>
               </Link>
             </button>
-
-            <div className="ml-auto flex items-center space-x-1 text-gray-400 dark:text-gray-500 text-xs cursor-default select-none">
-              <i className="far fa-clock"></i>
+            <div className="ml-auto flex items-center space-x-1 text-xs text-gray-400 dark:text-gray-500">
+              <i className="far fa-clock" />
               <span>KJV</span>
-              <i className="fas fa-chevron-down text-xs"></i>
+              <i className="fas fa-chevron-down text-xs" />
             </div>
           </div>
 
           {/* Filters */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-3 sm:space-y-0 mb-6">
+          <div className="mb-6 flex flex-col space-y-3 sm:flex-row sm:items-center sm:space-x-4 sm:space-y-0">
             <input
               type="search"
               placeholder="Search"
-              className="flex-grow border border-red-100 dark:border-red-900 bg-white dark:bg-gray-800 rounded-md px-4 py-2 text-sm placeholder:text-gray-300 dark:placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700"
+              className="flex-grow rounded-md border border-red-100 bg-white px-4 py-2 text-sm placeholder:text-gray-300 focus:outline-none focus:ring-1 focus:ring-red-300 dark:border-red-900 dark:bg-gray-800 dark:placeholder:text-gray-500 dark:focus:ring-red-700"
             />
-
-            {/* Book Dropdown */}
-            <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700">
-                Index
-                <ChevronDownIcon className="w-4 h-4 ml-2" />
-              </Menu.Button>
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Menu.Items className="absolute z-20 mt-2 w-96 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg rounded-md p-4 text-sm grid grid-cols-2 gap-x-6">
-                  <div className="col-span-2 mb-2">
-                    <input
-                      type="text"
-                      placeholder="Search"
-                      value={bookSearch}
-                      onChange={(e) => setBookSearch(e.target.value)}
-                      className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md px-3 py-1 text-sm text-gray-700 dark:text-gray-200 placeholder:text-gray-300 dark:placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700"
-                    />
-                  </div>
-                  {["Old Testament", "New Testament"].map((section) => (
-                    <div key={section}>
-                      <h4 className="font-semibold mb-1 text-gray-700 dark:text-gray-300">
-                        {section}
-                      </h4>
-                      <ul className="space-y-1">
-                        {filterBooks(section).map((book) => (
-                          <Menu.Item key={book}>
-                            {({ active }) => (
-                              <button
-                                className={`w-full text-left ${
-                                  active
-                                    ? "text-red-500 dark:text-red-400"
-                                    : "text-gray-700 dark:text-gray-200"
-                                }`}
-                              >
-                                {book}
-                              </button>
-                            )}
-                          </Menu.Item>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </Menu.Items>
-              </Transition>
-            </Menu>
-
-            {/* Chapter Dropdown */}
-            <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700">
-                Chapter
-                <ChevronDownIcon className="w-4 h-4 ml-2" />
-              </Menu.Button>
-
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg rounded-md p-4 text-sm">
-                  <div className="text-center font-semibold text-lg mb-3 text-gray-700 dark:text-gray-200">
-                    Chapter
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Search"
-                    value={chapterSearch}
-                    onChange={(e) => setChapterSearch(e.target.value)}
-                    className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md px-3 py-1 text-sm mb-4 text-gray-700 dark:text-gray-200 placeholder:text-gray-300 dark:placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700"
-                  />
-                  <div className="mb-2 text-sm">
-                    <span className="text-gray-500 dark:text-gray-400">
-                      Book
-                    </span>{" "}
-                    <span className="font-semibold text-gray-800 dark:text-gray-200">
-                      Jeremiah
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-6 gap-2">
-                    {filteredChapters.map((ch) => (
-                      <Menu.Item key={ch}>
+            {/* Book dropdown */}
+            <Dropdown
+              label="Index"
+              width="w-32 sm:w-36 md:w-40"
+              searchValue={bookSearch}
+              setSearchValue={setBookSearch}
+            >
+              {["Old Testament", "New Testament"].map((section) => (
+                <div key={section}>
+                  <h4 className="mb-1 font-semibold text-gray-700 dark:text-gray-300">
+                    {section}
+                  </h4>
+                  <ul className="space-y-1">
+                    {filterBooks(section).map((book) => (
+                      <Menu.Item key={book}>
                         {({ active }) => (
                           <button
-                            className={`w-full py-1 rounded-md text-center text-sm font-medium ${
+                            className={`w-full text-left ${
                               active
-                                ? "bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300"
-                                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200"
+                                ? "text-red-500 dark:text-red-400"
+                                : "text-gray-700 dark:text-gray-200"
                             }`}
                           >
-                            {ch}
+                            {book}
                           </button>
                         )}
                       </Menu.Item>
                     ))}
-                  </div>
-                </Menu.Items>
-              </Transition>
-            </Menu>
-
-            {/* Verse Dropdown */}
-            <Menu as="div" className="relative">
-              <Menu.Button className="flex items-center justify-between w-40 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md px-3 py-2 text-sm text-gray-600 dark:text-gray-200 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700">
-                Verse
-                <ChevronDownIcon className="w-4 h-4 ml-2" />
-              </Menu.Button>
-
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Menu.Items className="absolute right-0 z-20 mt-2 w-80 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg rounded-md p-4 text-sm">
-                  <div className="text-center font-semibold text-lg mb-3 text-gray-700 dark:text-gray-200">
-                    Verse
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Search"
-                    value={verseSearch}
-                    onChange={(e) => setVerseSearch(e.target.value)}
-                    className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md px-3 py-1 text-sm mb-4 text-gray-700 dark:text-gray-200 placeholder:text-gray-300 dark:placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-700"
-                  />
-                  <div className="mb-2 text-sm">
-                    <span className="text-gray-500 dark:text-gray-400">
-                      Chapter
-                    </span>{" "}
-                    <span className="font-semibold text-gray-800 dark:text-gray-200">
-                      30
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-6 gap-2">
-                    {filteredVerses.map((v) => (
-                      <Menu.Item key={v}>
-                        {({ active }) => (
-                          <button
-                            className={`w-full py-1 rounded-md text-center text-sm font-medium ${
-                              active
-                                ? "bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300"
-                                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200"
-                            }`}
-                          >
-                            {v}
-                          </button>
-                        )}
-                      </Menu.Item>
-                    ))}
-                  </div>
-                </Menu.Items>
-              </Transition>
-            </Menu>
+                  </ul>
+                </div>
+              ))}
+            </Dropdown>
+            {/* Chapter dropdown */}
+            <Dropdown
+              label="Chapter"
+              width="w-28 sm:w-32 md:w-40"
+              searchValue={chapterSearch}
+              setSearchValue={setChapterSearch}
+            >
+              <DropdownTitle title="Chapter" />
+              <DropdownSubTitle label="Book" value="1 Corinthians" />
+              <GridOptions options={filteredChapters} />
+            </Dropdown>
+            {/* Verse dropdown */}
+            <Dropdown
+              label="Verse"
+              width="w-28 sm:w-32 md:w-40"
+              searchValue={verseSearch}
+              setSearchValue={setVerseSearch}
+            >
+              <DropdownTitle title="Verse" />
+              <DropdownSubTitle label="Chapter" value="13" />
+              <GridOptions options={filteredVerses} />
+            </Dropdown>
           </div>
 
-          <div className="flex space-x-3 mb-6 select-none">
-            <Link
-              to="/lexicon"
-              className="flex-1 bg-gray-500 text-white rounded-md py-6 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
-            >
-              Lexicon
-            </Link>
-
-            <Link
+          {/* Nav Buttons */}
+          <div className="mb-6 flex select-none space-x-3">
+            <NavButton to="/lexicon" label="Lexicon" bg="bg-gray-500" />
+            <NavButton
               to="/sermon-mount"
-              className="flex-1 bg-rose-300 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
-            >
-              Cross Reference
-            </Link>
-
-            <Link
-              to="/jeremiah"
-              className="flex-1 bg-red-500 text-white rounded-md py-2 font-semibold text-sm hover:opacity-90 transition text-center flex items-center justify-center"
-            >
-              Interlinear
-            </Link>
+              label="Cross Reference"
+              bg="bg-rose-300"
+            />
+            <NavButton to="/jeremiah" label="Interlinear" bg="bg-red-500" />
           </div>
 
           {/* Main Passage */}
-          <div className="text-xl leading-6 text-gray-900 dark:text-gray-200 select-text mb-4">
-            <p className="font-semibold">
+          <section className="mb-6 select-text text-base leading-6 text-gray-900 dark:text-gray-200 md:text-xl md:leading-8">
+            <p className="font-semibold md:text-lg">
               Main Passage: 1 Corinthians 13:4–8 (NIV)
             </p>
-            <p className="text-lg text-gray-700 dark:text-gray-300 mt-2">
+            <p className="mt-2 text-gray-700 dark:text-gray-300">
               4 Love is patient, love is kind. It does not envy, it does not
               boast, it is not proud. 5 It does not dishonor others, it is not
               self-seeking, it is not easily angered, it keeps no record of
@@ -297,35 +173,111 @@ const Corinthians = () => {
               they will cease; where there are tongues, they will be stilled;
               where there is knowledge, it will pass away.
             </p>
-          </div>
+          </section>
 
-          {/* Cross-Reference Passages */}
-          <div className="text-2xl text-gray-900 dark:text-gray-100 select-text">
-            <p className="font-semibold mb-2">Cross-Reference Passages</p>
-
-            <div className="grid grid-cols-12 border-t border-gray-300 dark:border-gray-600 text-lg font-semibold text-left py-2">
-              <div className="col-span-3 px-2">Passage</div>
-              <div className="col-span-9 px-2">Content</div>
+          {/* Cross References */}
+          <section className="select-text text-lg text-gray-900 dark:text-gray-100 md:text-2xl">
+            <p className="mb-2 font-semibold">Cross-Reference Passages</p>
+            <div className="grid grid-cols-12 border-t border-gray-300 py-2 text-left font-semibold dark:border-gray-600">
+              <div className="col-span-4 px-2 sm:col-span-3">Passage</div>
+              <div className="col-span-8 px-2 sm:col-span-9">Content</div>
             </div>
-
-            {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+            {Array.from({ length: 7 }, (_, i) => (
               <div
                 key={i}
-                className="grid grid-cols-12 border-t border-gray-200 dark:border-gray-700 py-2 text-lg"
+                className="grid grid-cols-12 border-t border-gray-200 py-2 text-base dark:border-gray-700 md:text-lg"
               >
-                <div className="col-span-3 px-2">{i}. John 4:7–8</div>
-                <div className="col-span-9 px-2">
+                <div className="col-span-4 px-2 sm:col-span-3">
+                  {i + 1}. John 4:7–8
+                </div>
+                <div className="col-span-8 px-2 sm:col-span-9">
                   Dear friends, let us love one another, for love comes from
                   God. Everyone who loves has been born of God and knows God.
                   Whoever does not love does not know God, because God is love.
                 </div>
               </div>
             ))}
-          </div>
+          </section>
         </div>
       </main>
     </div>
   );
 };
+
+// Helper Components ---------------------------------------------
+const NavButton = ({ to, label, bg }) => (
+  <Link
+    to={to}
+    className={`flex-1 rounded-md ${bg} py-2 text-center text-sm font-semibold text-white transition hover:opacity-90 lg:py-6`}
+  >
+    {label}
+  </Link>
+);
+
+const Dropdown = ({ label, width, searchValue, setSearchValue, children }) => (
+  <Menu as="div" className="relative">
+    <Menu.Button
+      className={`flex items-center justify-between ${width} rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-red-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:focus:ring-red-700`}
+    >
+      {label}
+      <ChevronDownIcon className="ml-2 h-4 w-4" />
+    </Menu.Button>
+    <Transition
+      as={Fragment}
+      enter="transition ease-out duration-100"
+      enterFrom="opacity-0 scale-95"
+      enterTo="opacity-100 scale-100"
+      leave="transition ease-in duration-75"
+      leaveFrom="opacity-100 scale-100"
+      leaveTo="opacity-0 scale-95"
+    >
+      <Menu.Items className="absolute z-20 mt-2 w-64 rounded-md border border-gray-100 bg-white p-4 text-sm shadow-lg dark:border-gray-700 dark:bg-gray-800 sm:w-72 md:w-80">
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          className="mb-4 w-full rounded-md border border-gray-300 bg-white px-3 py-1 text-sm placeholder:text-gray-300 focus:outline-none focus:ring-1 focus:ring-red-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder:text-gray-500 dark:focus:ring-red-700"
+        />
+        {children}
+      </Menu.Items>
+    </Transition>
+  </Menu>
+);
+
+const DropdownTitle = ({ title }) => (
+  <div className="mb-2 text-center text-lg font-semibold text-gray-700 dark:text-gray-200">
+    {title}
+  </div>
+);
+
+const DropdownSubTitle = ({ label, value }) => (
+  <div className="mb-2 text-sm">
+    <span className="text-gray-500 dark:text-gray-400">{label} </span>
+    <span className="font-semibold text-gray-800 dark:text-gray-200">
+      {value}
+    </span>
+  </div>
+);
+
+const GridOptions = ({ options }) => (
+  <div className="grid grid-cols-5 gap-2 sm:grid-cols-6">
+    {options.map((opt) => (
+      <Menu.Item key={opt}>
+        {({ active }) => (
+          <button
+            className={`w-full rounded-md py-1 text-center text-sm font-medium ${
+              active
+                ? "bg-red-100 text-red-600 dark:bg-red-900 dark:text-red-300"
+                : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
+            }`}
+          >
+            {opt}
+          </button>
+        )}
+      </Menu.Item>
+    ))}
+  </div>
+);
 
 export default Corinthians;
