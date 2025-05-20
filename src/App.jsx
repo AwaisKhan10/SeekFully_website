@@ -7,7 +7,7 @@ import Tool from "./Component/Tool";
 import ToolEidt from "./Component/ToolEidt";
 import Study from "./Component/Study";
 import StudyInterliner from "./Component/StudyInterlinear";
-import Jeremiah from "./Component/Jeremiah";
+import Interlinear from "./Component/Interlinear";
 import BibleJeremiah30Page from "./Component/Bible";
 import SermonMount from "./Component/SermonMount";
 import CrossReference from "./Component/CrossReference";
@@ -54,7 +54,7 @@ function App() {
           <Route path="/tool-edit" element={<ToolEidt />} />
           <Route path="/study" element={<Study />} />
           <Route path="/study-interlinear" element={<StudyInterliner />} />
-          <Route path="/jeremiah" element={<Jeremiah />} />
+          <Route path="/Interlinear" element={<Interlinear />} />
           <Route path="/sermon-mount" element={<SermonMount />} />
           <Route path="/cross-reference" element={<CrossReference />} />
           <Route path="/corinthians" element={<Corinthians />} />

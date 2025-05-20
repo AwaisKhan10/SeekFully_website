@@ -5,65 +5,71 @@ import { Link } from "react-router-dom";
 
 export default function StudyInterliner() {
   return (
-    <div className="flex bg-[#f9f9f9] dark:bg-gray-900 min-h-screen font-montserrat transition-colors duration-300">
+    <div className="flex flex-col md:flex-row bg-[#f9f9f9] dark:bg-gray-900 min-h-screen font-montserrat transition-colors duration-300">
       {/* ── Sidebar ──────────────────────────────────────────────── */}
-      <aside className="w-40 bg-white dark:bg-gray-800 shadow-md flex flex-col items-center py-4 min-h-screen fixed -top-2 left-0">
+      <aside className="w-full md:w-24  flex flex-col items-center py-4 md:min-h-screen fixed md:static">
         <Sidebar />
       </aside>
 
       {/* ── Main Content ─────────────────────────────────────────── */}
-      <main className="flex-1 p-6 ml-24">
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 max-w-6xl mx-auto transition-colors duration-300">
-          {/* Header */}
-          <header className="flex justify-between items-center mb-6">
-            <nav className="flex space-x-6 text-sm font-medium">
-              <Link to="/study">
-                <button
-                  aria-current="page"
-                  className="text-[#B33A36] dark:text-red-400 border-b-2 border-[#B33A36] dark:border-red-400 pb-1"
-                >
-                  Study
-                </button>
-              </Link>
-              <Link to="/study-notes">
-                <button className="text-[#B7B7B7] dark:text-gray-400">
-                  Study Note
-                </button>
-              </Link>
-            </nav>
+      <main className="flex-1  sm:p-6 md:pt-3">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-8 max-w-6xl mx-auto transition-colors duration-300">
+          
+         {/* Header */}
+<header className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6 text-center">
+  <nav className="flex space-x-6 text-sm font-bold">
+    <Link to="/study">
+      <button
+        aria-current="page"
+        className="text-[#B33A36] dark:text-red-400 border-b-2 border-[#B33A36] dark:border-red-400 pb-1"
+      >
+        Study
+      </button>
+    </Link>
+    <Link to="/study-notes">
+      <button className="text-[#B7B7B7] dark:text-gray-400">
+        Study Note
+      </button>
+    </Link>
+  </nav>
 
-            {/* Profile */}
-            <Link to="/profile">
-              <div className="flex items-center space-x-2">
-                <img
-                  alt="Profile"
-                  className="w-8 h-8 rounded-full object-cover"
-                  src={img}
-                />
-                <span className="text-sm font-semibold text-[#0B1F3F] dark:text-gray-100">
-                  Jackson D.
-                </span>
-              </div>
-            </Link>
-          </header>
+  {/* Profile (optional: keep it aligned right in larger screens) */}
+  <Link to="/profile" className="sm:absolute sm:right-8">
+    <div className="flex items-center space-x-2 -mt-6">
+      <img
+        alt="Profile"
+        className="w-8 h-8 rounded-full object-cover"
+        src={img}
+      />
+      <span className="text-sm font-semibold text-[#0B1F3F] dark:text-gray-100">
+        Jackson D.
+      </span>
+    </div>
+  </Link>
+</header>
 
-          {/* Search Bar */}
-          <form className="mb-10">
-            <div className="relative">
-              <input
-                type="search"
-                placeholder="Search"
-                className="w-full border border-[#F4DADA] dark:border-gray-700 rounded-md py-2 pl-10 pr-4 text-sm
-                           text-[#333] dark:text-gray-100 placeholder-[#B7B7B7] dark:placeholder-gray-500
-                           bg-transparent dark:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-[#B33A36]/70"
-              />
-              <i className="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-[#B7B7B7] dark:text-gray-500 text-sm pointer-events-none" />
-            </div>
-          </form>
+{/* Search Bar */}
+<div className="flex justify-center mb-12">
+  <div
+    className="flex w-full sm:w-[700px] rounded-lg border border-red-600 overflow-hidden"
+    style={{ height: "50px" }}
+  >
+    <div className="flex items-center flex-grow px-4">
+      <i className="fas fa-search text-gray-300 text-lg"></i>
+      <input
+        type="text"
+        placeholder="Search"
+        className="flex-grow ml-3 py-3 text-sm text-black placeholder-gray-300 bg-transparent outline-none font-sans"
+        style={{ height: "58px" }}
+      />
+    </div>
+  </div>
+</div>
+
 
           {/* Button Grid */}
-          <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <Link to="/jeremiah">
+          <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1 sm:gap-6 ">
+            <Link to="/Interlinear">
               <StudyButton
                 color="#B33A36"
                 darkColor="#7f1d1d"
@@ -139,16 +145,19 @@ export default function StudyInterliner() {
 }
 
 /* ---------------------------------------------------------------- */
-
 function StudyButton({ color, darkColor, label }) {
   return (
     <button
       type="button"
       style={{ backgroundColor: color }}
-      className={`text-white rounded-lg py-8 px-4 text-center text-base font-medium h-28 w-full
+      className={`text-white rounded-lg px-4 text-center text-base font-semibold 
+                  h-32 sm:h-36 w-[100%] mx-auto flex items-center justify-center
                   dark:bg-[${darkColor}] transition-colors duration-300`}
     >
       {label}
     </button>
   );
 }
+
+
+

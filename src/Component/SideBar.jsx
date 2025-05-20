@@ -40,7 +40,7 @@ const Sidebar = () => {
           w-20 sm:w-24 md:w-28 lg:w-36
           h-screen fixed top-0 left-0 z-40
           flex flex-col items-center py-16 overflow-y-auto scrollbar-hide
-          bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800
+        
         `}
       >
         {/* Create button */}
@@ -79,8 +79,8 @@ const Sidebar = () => {
 
           {/* Bible */}
           <NavTile
-            to="/study-interlinear"
-            isActive={isActive("/study-interlinear")}
+            to="/bible"
+            isActive={isActive("/bible")}
             icon={<LiaBibleSolid className="text-[45px]" />}
             label="Bible"
             tileBg={tileBg}
@@ -89,8 +89,8 @@ const Sidebar = () => {
 
           {/* Study */}
           <NavTile
-            to="/study"
-            isActive={isActive("/study")}
+            to="/study-interlinear"
+            isActive={isActive("/study-interlinear")}
             icon={<PiNotebookBold className="text-4xl" />}
             label="Study"
             tileBg={tileBg}

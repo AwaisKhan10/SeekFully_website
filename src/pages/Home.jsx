@@ -23,10 +23,14 @@ const Home = () => {
   // const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex">
-      <Sidebar />
+  <div className="flex flex-col md:flex-row bg-gray-100 dark:bg-gray-900 min-h-screen font-montserrat transition-colors duration-300">
+      {/* ── Sidebar ──────────────────────────────────────────────── */}
+      <aside className="w-full md:w-24  flex flex-col items-center  md:min-h-screen fixed md:static">
+        <Sidebar />
+      </aside>
 
-      <div className="flex-1 ml-[160px] p-6 bg-white min-h-screen rounded-xl shadow-xl">
+      <main className="flex-1  sm:p-6 md:pt-3">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-8 max-w-6xl mx-auto transition-colors duration-300">
         {/* Header */}
         <header className="relative px-4 py-6 sm:px-8">
           {/* Login and Register Buttons */}
@@ -189,6 +193,7 @@ const Home = () => {
           </div>
         </section>
       </div>
+      </main>
     </div>
   );
 };
