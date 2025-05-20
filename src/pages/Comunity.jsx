@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { LuMessageSquareMore } from "react-icons/lu";
 import { HiRefresh } from "react-icons/hi";
-import { FaCaretDown, FaPaperPlane, FaTimes, FaSearch } from "react-icons/fa";
-import { GrAttachment } from "react-icons/gr";
+import { FaCaretDown, FaPaperPlane, FaSearch } from "react-icons/fa";
+import { GrAttachment, GrHome } from "react-icons/gr";
 import { AiFillHeart } from "react-icons/ai";
+import {
+  IoPersonOutline,
+  IoHeartOutline,
+  IoChatbubbleOutline,
+} from "react-icons/io5";
 import profile1 from "../assets/profile1.png";
 import profile from "../assets/profile.png";
 import commentimage from "../assets/community.png";
-import Trending from "../Component/Trending";
 import { Link } from "react-router-dom";
-import Sidebar from "../Component/SideBar";
 
+// Post Component
 function Post({ username, content, image, time, initialLikes }) {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(initialLikes);
@@ -147,7 +151,7 @@ function Post({ username, content, image, time, initialLikes }) {
                 className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
                 aria-label="Close comments popup"
               >
-                <FaTimes />
+                <FaCaretDown />
               </button>
             </div>
             <div className="flex-1 p-4 overflow-y-auto">
@@ -196,28 +200,70 @@ function Post({ username, content, image, time, initialLikes }) {
   );
 }
 
+// Trending Component
+function Trending() {
+  const trends = [
+    { topic: "DESIGN", threads: "123.8K threads" },
+    {
+      topic: "MOVIES AND SERIES: Spider-Man: Across the Spider-Verse",
+      threads: "93.4K threads",
+    },
+    { topic: "TECH", threads: "IPHONE 15" },
+    { topic: "GAMES", threads: "71.9K threads" },
+    { topic: "DESIGN", threads: "#Minimalism" },
+    { topic: "GAMES", threads: "71.9K threads" },
+    { topic: "DESIGN", threads: "#Minimalism" },
+    {
+      topic: "MOVIES AND SERIES: Spider-Man: Across the Spider-Verse",
+      threads: "93.4K threads",
+    },
+  ];
+
+  return (
+    <div className="w-64 bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-700 p-4">
+      <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+        TRENDING TOPICS
+      </h2>
+      <ul className="space-y-2">
+        {trends.map((trend, index) => (
+          <li key={index} className="text-sm">
+            <p className="font-medium text-gray-900 dark:text-gray-100">
+              {trend.topic}
+            </p>
+            <p className="text-gray-500 dark:text-gray-400">{trend.threads}</p>
+          </li>
+        ))}
+      </ul>
+      <a href="#" className="text-blue-500 text-sm mt-4 block">
+        See more
+      </a>
+    </div>
+  );
+}
+
+// Community Component
 function Community() {
   const [posts] = useState([
     {
-      username: "Ruchi_Shah",
+      username: "Ruchi_shah",
       content:
-        "Failures are stepping stones to success. Embrace them, learn from them, and keep moving forward",
+        "FAILURES are stepping stones to success. Embrace them, learn from them, and keep moving forward",
       time: "49m",
-      likes: 0,
+      likes: 1,
     },
     {
-      username: "Ruchi_Shah",
+      username: "Ruchi_shah",
       content:
-        "Failures are stepping stones to success. Embrace them, learn from them, and keep moving forward",
+        "FAILURES are stepping stones to success. Embrace them, learn from them, and keep moving forward",
       time: "49m",
-      likes: 0,
+      likes: 1,
     },
     {
-      username: "Ruchi_Shah",
+      username: "Ruchi_shah",
       content:
-        "Failures are stepping stones to success. Embrace them, learn from them, and keep moving forward",
+        "FAILURES are stepping stones to success. Embrace them, learn from them, and keep moving forward",
       time: "49m",
-      likes: 0,
+      likes: 1,
       image: commentimage,
     },
   ]);
@@ -232,99 +278,88 @@ function Community() {
   };
 
   return (
-    <div className="flex w-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
-      <div className="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
-        <Sidebar />
-      </div>
+    <div className="flex w-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300 min-h-screen">
       <main className="flex-1 p-4">
-        <div className="mt-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-          <div className="flex flex-col lg:flex-row lg:items-center">
-            <h1 className="text-[#C10201] text-2xl lg:text-3xl font-semibold">
-              Welcome Jackson...
-            </h1>
-            <div className="lg:ml-28 mt-2 lg:mt-0 flex gap-8 text-[#29272780] dark:text-[#fff6] font-semibold">
-              <Link to="/">
-                <a
-                  href="#"
-                  className="relative inline-block font-bold hover:text-red-700 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-700 after:transition-all after:duration-300 hover:after:w-full"
-                >
-                  Mapping
-                </a>
-              </Link>
-              <a
-                href="#"
-                className="relative inline-block font-bold hover:text-red-700 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-700 after:transition-all after:duration-300 hover:after:w-full"
-              >
-                Community
-              </a>
-            </div>
-          </div>
-          <div className="w-full lg:w-auto">
-            <Link to="/follow_requests">
-              <div className="relative w-full lg:w-64">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-colors duration-300"
-                />
-                <FaSearch className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400" />
-              </div>
-            </Link>
-          </div>
-        </div>
-
-        <div className="flex flex-col mt-6">
-          <div className="flex items-center w-full mb-4">
+        <div className="flex flex-col lg:flex-row gap-4">
+          {/* Sidebar integrated into main section */}
+          <div className="w-16 bg-white dark:bg-gray-800 border-r  dark:border-gray-700 flex flex-col items-center justify-center min-h-screen">
             <img
-              src={profile1}
+              src={profile}
               alt="Profile"
-              className="w-12 h-12 rounded-full mr-4 border border-gray-300 dark:border-gray-600"
+              className="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 mb-6"
             />
-            <div className="flex items-center w-full border rounded px-3 py-2 relative border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-300">
-              <input
-                type="text"
-                placeholder="Share something cool today"
-                className="w-full outline-none bg-transparent placeholder-gray-400 dark:placeholder-gray-500"
-              />
-              <div className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 ml-2">
-                <FaPaperPlane />
+            <div className="flex flex-col gap-6">
+              <div className="p-2 bg-red-500 rounded-full text-white">
+                <GrHome size={20} />
+              </div>
+              <div className="p-2 rounded-full text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">
+                <IoPersonOutline size={20} />
+              </div>
+              <div className="p-2 rounded-full text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">
+                <IoHeartOutline size={20} />
+              </div>
+              <div className="p-2 rounded-full text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">
+                <IoChatbubbleOutline size={20} />
               </div>
             </div>
           </div>
-          <div className="ml-16 flex items-center">
-            <label
-              htmlFor="file-upload"
-              className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 mr-2"
-            >
-              <GrAttachment />
-            </label>
-            <input
-              id="file-upload"
-              type="file"
-              className="hidden"
-              onChange={handleFileChange}
-            />
-            {selectedFileName && (
-              <span className="text-sm text-gray-600 dark:text-gray-400">
-                Selected file:{" "}
-                <span className="font-medium">{selectedFileName}</span>
-              </span>
-            )}
+
+          {/* Existing content (posts and comments) */}
+          <div className="flex-1">
+            <div className="flex flex-col mt-6">
+              <div className="flex items-center w-full mb-4">
+                <img
+                  src={profile1}
+                  alt="Profile"
+                  className="w-12 h-12 rounded-full mr-4 border border-gray-300 dark:border-gray-600"
+                />
+                <div className="flex items-center w-full border rounded px-3 py-2 relative  bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+                  <input
+                    type="text"
+                    placeholder="Share something cool today"
+                    className="w-full outline-none bg-transparent placeholder-gray-400 dark:placeholder-gray-500"
+                  />
+                  <div className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 ml-2">
+                    <FaPaperPlane />
+                  </div>
+                </div>
+              </div>
+              <div className="ml-16 flex items-center">
+                <label
+                  htmlFor="file-upload"
+                  className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 mr-2"
+                >
+                  <GrAttachment />
+                </label>
+                <input
+                  id="file-upload"
+                  type="file"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+                {selectedFileName && (
+                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                    Selected file:{" "}
+                    <span className="font-medium">{selectedFileName}</span>
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {posts.map((post, index) => (
+              <Post
+                key={index}
+                username={post.username}
+                content={post.content}
+                image={post.image}
+                time={post.time}
+                initialLikes={post.likes}
+              />
+            ))}
           </div>
         </div>
-
-        {posts.map((post, index) => (
-          <Post
-            key={index}
-            username={post.username}
-            content={post.content}
-            image={post.image}
-            time={post.time}
-            initialLikes={post.likes}
-          />
-        ))}
       </main>
-      <aside className="hidden lg:block w-64 bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-700">
+      <aside className="hidden lg:block">
         <Trending />
       </aside>
     </div>
