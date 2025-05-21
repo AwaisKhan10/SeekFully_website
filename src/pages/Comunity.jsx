@@ -3,17 +3,13 @@ import { CiHeart } from "react-icons/ci";
 import { LuMessageSquareMore } from "react-icons/lu";
 import { HiRefresh } from "react-icons/hi";
 import { FaCaretDown, FaPaperPlane, FaSearch } from "react-icons/fa";
-import { GrAttachment, GrHome } from "react-icons/gr";
-import { AiFillHeart } from "react-icons/ai";
-import {
-  IoPersonOutline,
-  IoHeartOutline,
-  IoChatbubbleOutline,
-} from "react-icons/io5";
+import { GrAttachment } from "react-icons/gr";
 import profile1 from "../assets/profile1.png";
 import profile from "../assets/profile.png";
 import commentimage from "../assets/community.png";
 import { Link } from "react-router-dom";
+import Sidebar from "../Component/SideBar";
+import Sidebar_small from "../Component/Sidbar_small";
 
 // Post Component
 function Post({ username, content, image, time, initialLikes }) {
@@ -279,84 +275,60 @@ function Community() {
 
   return (
     <div className="flex w-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300 min-h-screen">
+      <Sidebar /> {/* Using the imported Sidebar component */}
+      <Sidebar_small />
       <main className="flex-1 p-4">
-        <div className="flex flex-col lg:flex-row gap-4">
-          {/* Sidebar integrated into main section */}
-          <div className="w-16 bg-white dark:bg-gray-800 border-r  dark:border-gray-700 flex flex-col items-center justify-center min-h-screen">
-            <img
-              src={profile}
-              alt="Profile"
-              className="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 mb-6"
-            />
-            <div className="flex flex-col gap-6">
-              <div className="p-2 bg-red-500 rounded-full text-white">
-                <GrHome size={20} />
-              </div>
-              <div className="p-2 rounded-full text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">
-                <IoPersonOutline size={20} />
-              </div>
-              <div className="p-2 rounded-full text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">
-                <IoHeartOutline size={20} />
-              </div>
-              <div className="p-2 rounded-full text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">
-                <IoChatbubbleOutline size={20} />
-              </div>
-            </div>
-          </div>
-
-          {/* Existing content (posts and comments) */}
-          <div className="flex-1">
-            <div className="flex flex-col mt-6">
-              <div className="flex items-center w-full mb-4">
-                <img
-                  src={profile1}
-                  alt="Profile"
-                  className="w-12 h-12 rounded-full mr-4 border border-gray-300 dark:border-gray-600"
+        <div className="flex-1">
+          <div className="flex flex-col mt-6">
+            <div className="flex items-center w-full mb-4">
+              <img
+                src={profile1}
+                alt="Profile"
+                className="w-12 h-12 rounded-full mr-4 border border-gray-300 dark:border-gray-600"
+              />
+              <div className="flex items-center w-full border rounded px-3 py-2 relative bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+                <input
+                  type="text"
+                  placeholder="Share something cool today"
+                  className="w-full outline-none bg-transparent placeholder-gray-400 dark:placeholder-gray-500"
                 />
-                <div className="flex items-center w-full border rounded px-3 py-2 relative  bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-300">
-                  <input
-                    type="text"
-                    placeholder="Share something cool today"
-                    className="w-full outline-none bg-transparent placeholder-gray-400 dark:placeholder-gray-500"
-                  />
-                  <div className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 ml-2">
-                    <FaPaperPlane />
-                  </div>
+                <div className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 ml-2">
+                  <FaPaperPlane />
                 </div>
               </div>
-              <div className="ml-16 flex items-center">
-                <label
-                  htmlFor="file-upload"
-                  className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 mr-2"
-                >
-                  <GrAttachment />
-                </label>
-                <input
-                  id="file-upload"
-                  type="file"
-                  className="hidden"
-                  onChange={handleFileChange}
-                />
-                {selectedFileName && (
-                  <span className="text-sm text-gray-600 dark:text-gray-400">
-                    Selected file:{" "}
-                    <span className="font-medium">{selectedFileName}</span>
-                  </span>
-                )}
-              </div>
             </div>
-
-            {posts.map((post, index) => (
-              <Post
-                key={index}
-                username={post.username}
-                content={post.content}
-                image={post.image}
-                time={post.time}
-                initialLikes={post.likes}
+            <div className="ml-16 flex items-center">
+              <label
+                htmlFor="file-upload"
+                className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 mr-2"
+              >
+                <GrAttachment />
+              </label>
+              <input
+                id="file-upload"
+                type="file"
+                className="hidden"
+                onChange={handleFileChange}
               />
-            ))}
+              {selectedFileName && (
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  Selected file:{" "}
+                  <span className="font-medium">{selectedFileName}</span>
+                </span>
+              )}
+            </div>
           </div>
+
+          {posts.map((post, index) => (
+            <Post
+              key={index}
+              username={post.username}
+              content={post.content}
+              image={post.image}
+              time={post.time}
+              initialLikes={post.likes}
+            />
+          ))}
         </div>
       </main>
       <aside className="hidden lg:block">

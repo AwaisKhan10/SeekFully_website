@@ -38,7 +38,7 @@ const Sidebar = () => {
           ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
           transition-transform duration-300 ease-in-out
           w-20 sm:w-24 md:w-28 lg:w-36
-          h-screen fixed top-0 left-0 z-40
+          h-screen 
           flex flex-col items-center py-16 overflow-y-auto scrollbar-hide
         
         `}
