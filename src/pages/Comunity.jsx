@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { LuMessageSquareMore } from "react-icons/lu";
 import { HiRefresh } from "react-icons/hi";
-import { FaCaretDown, FaPaperPlane, FaSearch } from "react-icons/fa";
+import { FaCaretDown, FaPaperPlane } from "react-icons/fa";
 import { GrAttachment } from "react-icons/gr";
+import { AiFillHeart } from "react-icons/ai";
 import profile1 from "../assets/profile1.png";
 import profile from "../assets/profile.png";
 import commentimage from "../assets/community.png";
-import { Link } from "react-router-dom";
 import Sidebar from "../Component/SideBar";
 import Sidebar_small from "../Component/Sidbar_small";
 
@@ -21,13 +21,8 @@ function Post({ username, content, image, time, initialLikes }) {
   const [showReplies, setShowReplies] = useState(false);
 
   const handleLike = () => {
-    if (liked) {
-      setLikes(likes - 1);
-      setLiked(false);
-    } else {
-      setLikes(likes + 1);
-      setLiked(true);
-    }
+    setLiked(!liked);
+    setLikes((prev) => (liked ? prev - 1 : prev + 1));
   };
 
   const handleCommentClick = () => {
@@ -207,12 +202,6 @@ function Trending() {
     { topic: "TECH", threads: "IPHONE 15" },
     { topic: "GAMES", threads: "71.9K threads" },
     { topic: "DESIGN", threads: "#Minimalism" },
-    { topic: "GAMES", threads: "71.9K threads" },
-    { topic: "DESIGN", threads: "#Minimalism" },
-    {
-      topic: "MOVIES AND SERIES: Spider-Man: Across the Spider-Verse",
-      threads: "93.4K threads",
-    },
   ];
 
   return (
@@ -275,60 +264,69 @@ function Community() {
 
   return (
     <div className="flex w-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300 min-h-screen">
-      <Sidebar /> {/* Using the imported Sidebar component */}
-      <Sidebar_small />
-      <main className="flex-1 p-4">
-        <div className="flex-1">
-          <div className="flex flex-col mt-6">
-            <div className="flex items-center w-full mb-4">
-              <img
-                src={profile1}
-                alt="Profile"
-                className="w-12 h-12 rounded-full mr-4 border border-gray-300 dark:border-gray-600"
-              />
-              <div className="flex items-center w-full border rounded px-3 py-2 relative bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-300">
-                <input
-                  type="text"
-                  placeholder="Share something cool today"
-                  className="w-full outline-none bg-transparent placeholder-gray-400 dark:placeholder-gray-500"
-                />
-                <div className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 ml-2">
-                  <FaPaperPlane />
+      <Sidebar />
+      <main className="flex-1 p-4 flex justify-center">
+        <div className="w-full  bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-4">
+          <div className="flex">
+            {/* Small Sidebar */}
+            <div className="mr-4 mt-[210px]">
+              <Sidebar_small />
+            </div>
+
+            {/* Post Feed */}
+            <div className="flex-1">
+              <div className="flex flex-col mt-6">
+                <div className="flex items-center w-full mb-4">
+                  <img
+                    src={profile1}
+                    alt="Profile"
+                    className="w-12 h-12 rounded-full mr-4 border border-gray-300 dark:border-gray-600"
+                  />
+                  <div className="flex items-center w-full border rounded px-3 py-2 relative bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+                    <input
+                      type="text"
+                      placeholder="Share something cool today"
+                      className="w-full outline-none bg-transparent placeholder-gray-400 dark:placeholder-gray-500"
+                    />
+                    <div className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 ml-2">
+                      <FaPaperPlane />
+                    </div>
+                  </div>
+                </div>
+                <div className="ml-16 flex items-center">
+                  <label
+                    htmlFor="file-upload"
+                    className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 mr-2"
+                  >
+                    <GrAttachment />
+                  </label>
+                  <input
+                    id="file-upload"
+                    type="file"
+                    className="hidden"
+                    onChange={handleFileChange}
+                  />
+                  {selectedFileName && (
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      Selected file:{" "}
+                      <span className="font-medium">{selectedFileName}</span>
+                    </span>
+                  )}
                 </div>
               </div>
-            </div>
-            <div className="ml-16 flex items-center">
-              <label
-                htmlFor="file-upload"
-                className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 mr-2"
-              >
-                <GrAttachment />
-              </label>
-              <input
-                id="file-upload"
-                type="file"
-                className="hidden"
-                onChange={handleFileChange}
-              />
-              {selectedFileName && (
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  Selected file:{" "}
-                  <span className="font-medium">{selectedFileName}</span>
-                </span>
-              )}
+
+              {posts.map((post, index) => (
+                <Post
+                  key={index}
+                  username={post.username}
+                  content={post.content}
+                  image={post.image}
+                  time={post.time}
+                  initialLikes={post.likes}
+                />
+              ))}
             </div>
           </div>
-
-          {posts.map((post, index) => (
-            <Post
-              key={index}
-              username={post.username}
-              content={post.content}
-              image={post.image}
-              time={post.time}
-              initialLikes={post.likes}
-            />
-          ))}
         </div>
       </main>
       <aside className="hidden lg:block">
