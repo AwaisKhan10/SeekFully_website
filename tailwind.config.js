@@ -1,16 +1,18 @@
-// tailwind.config.js (ESM syntax)
+// tailwind.config.js
 import scrollbarHide from "tailwind-scrollbar-hide";
 
 /** @type {import('tailwindcss').Config} */
-export default {
+const config = {
   darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
-        montserrat: ["montserrat", "sans-serif"],
+        montserrat: ["Montserrat", "sans-serif"],
       },
     },
   },
   plugins: [scrollbarHide],
 };
+
+export default config;

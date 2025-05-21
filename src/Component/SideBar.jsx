@@ -14,7 +14,6 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path;
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  /* helper to keep the “active OR hover” background logic DRY */
   const tileBg = (active) =>
     `${
       active
@@ -35,12 +34,14 @@ const Sidebar = () => {
       {/* ── Sidebar ───────────────────────────────────── */}
       <aside
         className={`
-          ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
+          ${isOpen ? "translate-x-0" : "-translate-x-full"}
+          md:translate-x-0
           transition-transform duration-300 ease-in-out
           w-20 sm:w-24 md:w-28 lg:w-36
           h-screen 
+          fixed top-0 left-0 z-40
+           dark:bg-gray-900
           flex flex-col items-center py-16 overflow-y-auto scrollbar-hide
-        
         `}
       >
         {/* Create button */}
@@ -57,7 +58,6 @@ const Sidebar = () => {
 
         {/* Menu tiles */}
         <ul className="flex flex-col gap-y-4 text-center w-full items-center">
-          {/* Verse Mapping */}
           <NavTile
             to="/"
             isActive={isActive("/")}
@@ -67,7 +67,6 @@ const Sidebar = () => {
             close={() => setIsOpen(false)}
           />
 
-          {/* Community */}
           <NavTile
             to="/Comunity"
             isActive={isActive("/Comunity")}
@@ -77,7 +76,6 @@ const Sidebar = () => {
             close={() => setIsOpen(false)}
           />
 
-          {/* Bible */}
           <NavTile
             to="/bible"
             isActive={isActive("/bible")}
@@ -87,7 +85,6 @@ const Sidebar = () => {
             close={() => setIsOpen(false)}
           />
 
-          {/* Study */}
           <NavTile
             to="/study-interlinear"
             isActive={isActive("/study-interlinear")}
@@ -97,7 +94,6 @@ const Sidebar = () => {
             close={() => setIsOpen(false)}
           />
 
-          {/* Seeker AI */}
           <NavTile
             to="/seeker-ai"
             isActive={isActive("/seeker-ai")}
@@ -107,7 +103,6 @@ const Sidebar = () => {
             close={() => setIsOpen(false)}
           />
 
-          {/* More / profile */}
           <NavTile
             to="/profile"
             isActive={isActive("/profile")}
@@ -118,12 +113,18 @@ const Sidebar = () => {
           />
         </ul>
       </aside>
+
+      {/* ── Backdrop on mobile ────────────────────────── */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
+          onClick={toggleMenu}
+        ></div>
+      )}
     </>
   );
 };
 
-/* ------------------------------------------------------------- */
-/* ↳  A small helper component to avoid repetition               */
 function NavTile({ to, isActive, icon, label, tileBg, close }) {
   return (
     <Link to={to} onClick={close}>
