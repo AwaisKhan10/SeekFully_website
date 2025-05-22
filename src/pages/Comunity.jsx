@@ -263,11 +263,11 @@ function Community() {
   };
 
   return (
-    <div className="flex w-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300 min-h-screen">
+    <div className="flex  bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300 min-h-screen">
       <Sidebar />
-      <main className="flex-1 p-4 flex justify-center">
+      <main className="flex-1  p-4 flex ml-32">
         <div className="w-full  bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-4">
-          <div className="flex">
+          <div className="flex ">
             {/* Small Sidebar */}
             <div className="mr-4 mt-[210px]">
               <Sidebar_small />

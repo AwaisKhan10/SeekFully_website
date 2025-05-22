@@ -3,8 +3,10 @@ import Sidebar from "./SideBar";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Interlinear = () => {
+  const navigate = useNavigate();
   const books = {
     "Old Testament": [
       "Genesis",
@@ -72,9 +74,9 @@ const Interlinear = () => {
           <div className="relative flex flex-col sm:flex-row items-start sm:items-center text-sm font-normal text-gray-700 dark:text-gray-300 mb-6 select-none">
             <button className="flex items-center space-x-1 hover:underline mb-2 sm:mb-0">
               <i className="fas fa-arrow-left"></i>
-              <Link to="/study-interlinear">
+              <button onClick={() => navigate(-1)}>
                 <span>Go Back</span>
-              </Link>
+              </button>
             </button>
             <div className="sm:absolute sm:left-1/2 sm:transform sm:-translate-x-1/2 flex space-x-6">
               <button className="text-red-600 dark:text-red-400 font-semibold border-b-2 border-red-600 dark:border-red-400 pb-1">
@@ -104,53 +106,87 @@ const Interlinear = () => {
               </div>
             </div>
 
-            <DropdownMenu label="Index" items={filterBooks} sections={books} search={bookSearch} setSearch={setBookSearch} />
-            <DropdownMenu label="Chapter" items={filteredChapters} search={chapterSearch} setSearch={setChapterSearch} title="Chapter" />
-            <DropdownMenu label="Verse" items={filteredVerses} search={verseSearch} setSearch={setVerseSearch} title="Verse" />
+            <DropdownMenu
+              label="Index"
+              items={filterBooks}
+              sections={books}
+              search={bookSearch}
+              setSearch={setBookSearch}
+            />
+            <DropdownMenu
+              label="Chapter"
+              items={filteredChapters}
+              search={chapterSearch}
+              setSearch={setChapterSearch}
+              title="Chapter"
+            />
+            <DropdownMenu
+              label="Verse"
+              items={filteredVerses}
+              search={verseSearch}
+              setSearch={setVerseSearch}
+              title="Verse"
+            />
           </div>
 
           {/* Navigation Buttons */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 select-none">
-            <Link to="/lexicon" className="bg-[#8B8E7D] text-white rounded-md h-16 font-semibold text-sm hover:opacity-90 transition flex items-center justify-center text-center">
+            <Link
+              to="/lexicon"
+              className="bg-[#8B8E7D] text-white rounded-md h-16 font-semibold text-sm hover:opacity-90 transition flex items-center justify-center text-center"
+            >
               Lexicon
             </Link>
-            <Link to="/sermon-mount" className="bg-[#B33A36] text-white rounded-md h-20 font-semibold text-sm hover:opacity-90 transition flex items-center justify-center text-center">
+            <Link
+              to="/sermon-mount"
+              className="bg-[#B33A36] text-white rounded-md h-20 font-semibold text-sm hover:opacity-90 transition flex items-center justify-center text-center"
+            >
               Interlinear
             </Link>
-            <Link to="/cross-reference" className="bg-[#D9A79E] text-white rounded-md h-16 font-semibold text-sm hover:opacity-90 transition flex items-center justify-center text-center">
+            <Link
+              to="/cross-reference"
+              className="bg-[#D9A79E] text-white rounded-md h-16 font-semibold text-sm hover:opacity-90 transition flex items-center justify-center text-center"
+            >
               Cross Reference
             </Link>
           </div>
 
- {/* Chapter Title */}
+          {/* Chapter Title */}
           <h1 className="text-4xl font-bold mb-5 text-gray-900 dark:text-gray-100 select-text">
             Jeremiah 30
           </h1>
 
-           {/* Sample Verses */}
-      <div className="text-xl text-gray-900 dark:text-gray-200 select-text space-y-1 montserrat">
-        <p>1. In the beginning God created the heavens and the earth.</p>
-        <p>
-          2. Now the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.
-        </p>
-        <p>3. And God said, “Let there be light,” and there was light.</p>
-        <p>
-          4. God saw that the light was good, and he separated the light from the darkness.
-        </p>
-        <p>
-          5. God called the light “day,” and the darkness he called “night.” And there was evening, and there was morning—the first day.
-        </p>
-        <p>
-          6. And God said, “Let there be a vault between the waters to separate water from water.”
-        </p>
-        <p>
-          7. So God made the vault and separated the water under the vault from the water above it. And it was so.
-        </p>
-        <p>
-          8. God called the vault “sky.” And there was evening, and there was morning—the second day.
-        </p>
-        <p>9. And God said, “Let dry ground appear,” and it was so.</p>
-      </div>
+          {/* Sample Verses */}
+          <div className="text-xl text-gray-900 dark:text-gray-200 select-text space-y-1 montserrat">
+            <p>1. In the beginning God created the heavens and the earth.</p>
+            <p>
+              2. Now the earth was formless and empty, darkness was over the
+              surface of the deep, and the Spirit of God was hovering over the
+              waters.
+            </p>
+            <p>3. And God said, “Let there be light,” and there was light.</p>
+            <p>
+              4. God saw that the light was good, and he separated the light
+              from the darkness.
+            </p>
+            <p>
+              5. God called the light “day,” and the darkness he called “night.”
+              And there was evening, and there was morning—the first day.
+            </p>
+            <p>
+              6. And God said, “Let there be a vault between the waters to
+              separate water from water.”
+            </p>
+            <p>
+              7. So God made the vault and separated the water under the vault
+              from the water above it. And it was so.
+            </p>
+            <p>
+              8. God called the vault “sky.” And there was evening, and there
+              was morning—the second day.
+            </p>
+            <p>9. And God said, “Let dry ground appear,” and it was so.</p>
+          </div>
         </div>
       </main>
     </div>
@@ -166,7 +202,11 @@ const DropdownMenu = ({ label, items, sections, search, setSearch, title }) => (
     </Menu.Button>
     <Transition as={Fragment} {...transitionProps}>
       <Menu.Items className="absolute z-20 mt-2 w-full min-w-[12rem] sm:w-80 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-lg rounded-md p-4 text-sm">
-        {title && <div className="text-center font-semibold text-lg mb-3 text-gray-700 dark:text-gray-200">{title}</div>}
+        {title && (
+          <div className="text-center font-semibold text-lg mb-3 text-gray-700 dark:text-gray-200">
+            {title}
+          </div>
+        )}
         <input
           type="text"
           placeholder="Search"
@@ -178,7 +218,9 @@ const DropdownMenu = ({ label, items, sections, search, setSearch, title }) => (
           <div className="grid grid-cols-2 gap-x-6">
             {Object.keys(sections).map((section) => (
               <div key={section}>
-                <h4 className="font-semibold mb-1 text-gray-700 dark:text-gray-300">{section}</h4>
+                <h4 className="font-semibold mb-1 text-gray-700 dark:text-gray-300">
+                  {section}
+                </h4>
                 <ul className="space-y-1">
                   {items(section).map((book) => (
                     <Menu.Item key={book}>

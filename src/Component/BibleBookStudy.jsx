@@ -3,8 +3,10 @@ import Sidebar from "./SideBar";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon, SunIcon, MoonIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const BibleBookStudy = () => {
+  const navigate = useNavigate();
   const books = {
     "Old Testament": [
       "Genesis",
@@ -106,9 +108,9 @@ const BibleBookStudy = () => {
           <div className="relative flex items-center text-sm font-normal text-gray-700 dark:text-gray-300 mb-6 select-none">
             <button className="flex items-center space-x-1 hover:underline">
               <i className="fas fa-arrow-left" />
-              <Link to="/study-interlinear">
+              <button onClick={() => navigate(-1)}>
                 <span>Go Back</span>
-              </Link>
+              </button>
             </button>
 
             <div className="absolute left-1/2 -translate-x-1/2 flex space-x-6">

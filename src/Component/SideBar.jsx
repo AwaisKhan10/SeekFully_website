@@ -5,6 +5,8 @@ import { LiaBibleSolid } from "react-icons/lia";
 import { PiNotebookBold } from "react-icons/pi";
 import { GrAppsRounded } from "react-icons/gr";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { FaPaintBrush } from "react-icons/fa";
+
 import color from "../assets/color.png";
 
 const Sidebar = () => {
@@ -35,7 +37,7 @@ const Sidebar = () => {
       <aside
         className={`
           ${isOpen ? "translate-x-0" : "-translate-x-full"}
-          md:translate-x-0
+          md:translate-x-0 bg-white
           transition-transform duration-300 ease-in-out
           w-20 sm:w-24 md:w-28 lg:w-36
           h-screen 
@@ -61,12 +63,11 @@ const Sidebar = () => {
           <NavTile
             to="/"
             isActive={isActive("/")}
-            icon={<img src={color} alt="color" className="w-8 h-8" />}
+            icon={<FaPaintBrush className="text-3xl" />}
             label="VM"
             tileBg={tileBg}
             close={() => setIsOpen(false)}
           />
-
           <NavTile
             to="/Comunity"
             isActive={isActive("/Comunity")}

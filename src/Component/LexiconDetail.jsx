@@ -3,8 +3,10 @@ import Sidebar from "./SideBar";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LexiconDetail = () => {
+  const navigate = useNavigate();
   const books = {
     "Old Testament": [
       "Genesis",
@@ -103,10 +105,10 @@ const LexiconDetail = () => {
           <div className="relative flex items-center text-sm font-normal text-gray-700 dark:text-gray-300 mb-6 select-none">
             <button className="flex items-center space-x-1 hover:underline">
               <i className="fas fa-arrow-left"></i>
-              <Link to="/study-interlinear">
+              <button onClick={() => navigate(-1)}>
                 {" "}
                 <span>Go Back</span>{" "}
-              </Link>
+              </button>
             </button>
 
             <div className="ml-auto flex items-center space-x-1 text-gray-400 text-xs cursor-default select-none">

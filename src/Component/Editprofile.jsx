@@ -1,165 +1,280 @@
-import React from "react";
+import React, { useState } from "react";
+import { FiEdit, FiSave, FiUpload, FiArrowLeft } from "react-icons/fi";
+import { AiOutlineLike } from "react-icons/ai";
+import { BiCommentDetail } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 import postImage from "../assets/post-img.png";
 import profilepage from "../assets/profilepage.png";
 import Sidebar from "./SideBar";
 
 function Editprofile() {
+  const navigate = useNavigate();
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [profileImage, setProfileImage] = useState("default-avatar.jpg");
+  const [name, setName] = useState("Bernard Ward");
+  const [email] = useState("BernardWard@gmail.com");
+  const [location, setLocation] = useState("Minnesota, US");
+  const [bio, setBio] = useState(
+    "For God so loved the world that he gave his only begotten Son."
+  );
+  const [selectedTab, setSelectedTab] = useState("posts");
+
+  const [posts] = useState([
+    {
+      id: 1,
+      name: "Bernard Ward",
+      time: "Just now",
+      content: bio,
+      image: postImage,
+    },
+    {
+      id: 2,
+      name: "Bernard Ward",
+      time: "2 hours ago",
+      content: "This is another great day to praise God!",
+      image: postImage,
+    },
+    {
+      id: 3,
+      name: "Bernard Ward",
+      time: "Just now",
+      content: bio,
+      image: postImage,
+    },
+    {
+      id: 4,
+      name: "Bernard Ward",
+      time: "2 hours ago",
+      content: "This is another great day to praise God!",
+      image: postImage,
+    },
+  ]);
+
+  const [friends] = useState([
+    {
+      id: 1,
+      name: "Ralph Edwards",
+      detail: "TCPA Compliance",
+      image: profilepage,
+    },
+    {
+      id: 2,
+      name: "Jerome Bell",
+      detail: "Speech Recognition",
+      image: profilepage,
+    },
+    {
+      id: 3,
+      name: "Ronald Richards",
+      detail: "Quality Monitoring",
+      image: profilepage,
+    },
+    { id: 4, name: "Guy Hawkins", detail: "Voicestream", image: profilepage },
+    {
+      id: 5,
+      name: "Kristin Watson",
+      detail: "UC Integrations",
+      image: profilepage,
+    },
+    {
+      id: 6,
+      name: "Floyd Miles",
+      detail: "Preview Dialer",
+      image: profilepage,
+    },
+  ]);
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
-    <div className="bg-[#f7f9fa] min-h-screen flex">
-      {/* Sidebar - fixed width */}
-      <div className="w-36">
-        <Sidebar />
-      </div>
+    <>
+      <Sidebar />
 
-      {/* Main content - takes the remaining space */}
-      <main className="flex-1 p-2 ">
-        <div className="bg-white min-h-screen p-6 shadow-xl rounded-2xl ">
-          {/* Header */}
-          <header className="pt-6 px-6 pb-2 flex items-center space-x-3">
-            <button aria-label="Back" className="text-gray-700 text-lg">
-              <i className="fas fa-arrow-left"></i>
-            </button>
-            <h1 className="text-gray-700 font-normal text-lg">Profile</h1>
-          </header>
+      <div className="w-[1000px] mx-auto p-4 md:p-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg dark:shadow-black">
+        {/* Back Button */}
+        <div className="mb-4">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white text-2xl font-semibold"
+          >
+            <FiArrowLeft className="text-2xl" />
+            Back
+          </button>
+        </div>
 
-          {/* Profile section */}
-          <section className="flex flex-col items-center pt-6 pb-4 px-6">
-            <div className="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
-              <img
-                src={profilepage}
-                alt="Portrait"
-                className="w-full h-full object-cover"
+        {/* Profile Header */}
+        <div className="flex flex-col md:flex-row items-center gap-6 mb-8">
+          <div className="relative group">
+            <img
+              src={profilepage}
+              alt="Profile"
+              className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-red-100 dark:border-gray-700 cursor-pointer"
+            />
+            <label
+              htmlFor="image-upload"
+              className="absolute bottom-0 right-0 bg-white dark:bg-gray-700 p-2 rounded-full shadow-md cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
+            >
+              <FiUpload className="text-red-600" />
+              <input
+                id="image-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
               />
+            </label>
+          </div>
+
+          <div className="flex-1 text-center md:text-left">
+            <div className="flex justify-center md:justify-start items-center gap-4 mb-2">
+              {isEditingName ? (
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="text-2xl font-bold border-b-2 border-red-500 bg-transparent text-gray-900 dark:text-white outline-none"
+                />
+              ) : (
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  {name}
+                </h1>
+              )}
+              <button
+                onClick={() => setIsEditingName(!isEditingName)}
+                className="text-red-600 hover:text-red-800"
+              >
+                {isEditingName ? <FiSave size={20} /> : <FiEdit size={20} />}
+              </button>
             </div>
-            <h2 className="mt-4 font-semibold text-gray-800 text-base leading-5">
-              Bernard Ward
-            </h2>
-            <p className="text-xs text-gray-400 mt-1">BernardWard@gmail.com</p>
-          </section>
+            <p className="text-gray-600 dark:text-gray-400 mb-1">{email}</p>
+            <p className="text-gray-600 dark:text-gray-400">{location}</p>
+          </div>
+        </div>
 
-          {/* Navigation */}
-          <nav className="flex justify-center text-sm text-gray-500 font-normal">
-            <button className="relative px-6 py-3 text-gray-800 font-semibold after:absolute after:-bottom-px after:left-0 after:right-0 after:h-[1.5px] after:bg-gray-800">
-              Posts
-            </button>
-            <button className="px-6 py-3">Friends</button>
-          </nav>
+        {/* Bio Section */}
+        <div className="mb-8 text-center md:text-left">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            Bio
+          </h3>
+          <p className="text-gray-600 dark:text-gray-400">{bio}</p>
+        </div>
 
-          {/* Posts */}
-          <section className="px-4 pt-4 pb-8 space-y-6">
-            {/* Post 1 */}
-           <article className="relative bg-white rounded-lg border border-gray-100  overflow-hidden">
-  {/* Header */}
-  <header className="px-4 pt-4 pb-2 flex items-center space-x-3">
-  <img
-    src={profilepage} // replace with your actual profile image variable or URL
-    alt="Profile"
-    className="w-8 h-8 rounded-full object-cover"
-  />
-  <div>
-    <h3 className="text-xs font-semibold text-gray-800">Bernard Ward</h3>
-    <p className="text-xs text-gray-400">Minnesota, US</p>
-  </div>
-</header>
+        {/* Tabs */}
+        <div className="flex gap-8 border-b border-gray-300 dark:border-gray-700 mb-6 justify-center md:justify-start">
+          <button
+            className={`py-2 px-4 font-semibold ${
+              selectedTab === "posts"
+                ? "border-b-2 border-red-600 text-red-600"
+                : "text-gray-600 dark:text-gray-400 hover:text-red-600"
+            }`}
+            onClick={() => setSelectedTab("posts")}
+          >
+            Posts
+          </button>
+          <button
+            className={`py-2 px-4 font-semibold ${
+              selectedTab === "friends"
+                ? "border-b-2 border-red-600 text-red-600"
+                : "text-gray-600 dark:text-gray-400 hover:text-red-600"
+            }`}
+            onClick={() => setSelectedTab("friends")}
+          >
+            Friends
+          </button>
+        </div>
 
+        {/* Posts */}
+        {selectedTab === "posts" && (
+          <div className="mb-8">
+            {posts.map((post) => (
+              <div
+                key={post.id}
+                className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg mb-6"
+              >
+                {/* Post Header */}
+                <div className="flex items-center mb-4">
+                  <img
+                    src={profilepage}
+                    alt="User"
+                    className="w-10 h-10 rounded-full mr-3"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">
+                      {post.name}
+                    </h4>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      {post.time}
+                    </p>
+                  </div>
+                </div>
 
-  {/* Post Image */}
-  <img
-    src={postImage}
-    alt="Post 1"
-    className="w-[96%] object-cover ms-5 rounded-sm"
-    style={{ height: "200px" }}
-  />
+                {/* Post Content */}
+                <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  {post.content}
+                </p>
+                {post.image && (
+                  <img
+                    src={post.image}
+                    alt="Post"
+                    className="w-full rounded-lg mb-4 max-h-[400px] object-cover"
+                  />
+                )}
 
-  {/* Footer */}
-  <footer className="relative px-4 pt-2 pb-10 text-xs text-gray-400">
-    <div>
-      <p className="mb-1">
-        <span className="font-semibold text-gray-800">Joshua_l</span><br />
-        For God so love the world and he gave us his only begotten son.
-      </p>
-     <div className="flex space-x-4">
-  <div className="flex items-center space-x-1">
-    <i className="far fa-heart text-base"></i>
-    <span>300</span>
-  </div>
-  <div className="flex items-center space-x-1">
-    <i className="far fa-comment text-base"></i>
-    <span>20</span>
-  </div>
-</div>
+                {/* Actions */}
+                <div className="flex gap-6 text-gray-500 dark:text-gray-400">
+                  <button className="flex items-center gap-1 hover:text-blue-600">
+                    <AiOutlineLike className="text-xl" /> 300
+                  </button>
+                  <button className="flex items-center gap-1 hover:text-blue-600">
+                    <BiCommentDetail className="text-xl" /> 20
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
+        {/* Friends */}
+        {selectedTab === "friends" && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {friends.map((friend) => (
+              <div
+                key={friend.id}
+                className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <div className="flex items-center gap-4">
+                  <img
+                    src={friend.image}
+                    alt={friend.name}
+                    className="w-12 h-12 rounded-full object-cover border-2 border-blue-200"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">
+                      {friend.name}
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
+                      {friend.detail}
+                    </p>
+                  </div>
+                </div>
+                <span className="text-sm text-gray-500 dark:text-gray-400">
+                  6k followers
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-        {/* Bottom-right stacked time and comment icon */}
-    <div className="absolute bottom-9 right-4 flex flex-col items-end space-y-1 text-xs text-gray-400">
-      <time>3m ago</time>
-      <button aria-label="More options">
-        <i className="far fa-share-square"></i>
-
-      </button>
-    </div>
-  </footer>
-</article>
-
-
-            {/* Post 2 */}
-<article className="rounded-lg border border-gray-100 overflow-hidden bg-white shadow-sm">
-  {/* Header */}
-  <header className="flex items-center px-4 pt-4 pb-2 space-x-3">
-    <img
-      src={profilepage}
-      alt="Profile"
-      className="w-8 h-8 rounded-full object-cover"
-    />
-    <div>
-      <h3 className="text-xs font-semibold text-gray-800">Bernard Ward</h3>
-      <p className="text-xs text-gray-400">Minnesota, US</p>
-    </div>
-  </header>
-
-  {/* Post Image */}
-  <img
-    src={postImage}
-    alt="Post"
-    className="w-full rounded-sm object-cover"
-    style={{ height: "200px" }}
-  />
-
-  {/* Footer */}
-  <footer className="relative px-4 pt-2 pb-10 text-xs text-gray-400">
-    <div>
-      <p className="mb-1">
-        <span className="font-semibold text-gray-800">Joshua_l</span><br />
-        For God so love the world and he gave us his only begotten son.
-      </p>
-
-      <div className="flex space-x-4">
-        <div className="flex items-center space-x-1">
-          <i className="far fa-heart text-base"></i>
-          <span>300</span>
-        </div>
-        <div className="flex items-center space-x-1">
-          <i className="far fa-comment text-base"></i>
-          <span>20</span>
-        </div>
-      </div>
-    </div>
-
-    {/* Bottom-right stacked time and share icon */}
-    <div className="absolute bottom-3 right-4 flex flex-col items-end space-y-1 text-xs text-gray-400">
-      <time>3m ago</time>
-      <button aria-label="Share">
-        <i className="far fa-share-square"></i>
-      </button>
-    </div>
-  </footer>
-</article>
-
-
-          </section>
-        </div>
-      </main>
-    </div>
+    </>
   );
 }
 

@@ -4,8 +4,10 @@ import Sidebar from "./SideBar";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Corinthians = () => {
+  const navigate = useNavigate();
   const books = {
     "Old Testament": [
       "Genesis",
@@ -73,9 +75,9 @@ const Corinthians = () => {
           <div className="relative mb-6 flex items-center select-none text-sm font-normal text-gray-700 dark:text-gray-300">
             <button className="flex items-center space-x-1 hover:underline">
               <i className="fas fa-arrow-left" />
-              <Link to="/study-interlinear">
+              <button onClick={() => navigate(-1)}>
                 <span>Go Back</span>
-              </Link>
+              </button>
             </button>
             <div className="ml-auto flex items-center space-x-1 text-xs text-gray-400 dark:text-gray-500">
               <i className="far fa-clock" />
