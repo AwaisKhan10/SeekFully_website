@@ -29,7 +29,7 @@ const Home = () => {
       </aside>
 
       <main className="flex-1 sm:p-6 md:pt-3">
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-8 max-w-6xl mx-auto transition-colors duration-300">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-8 max-w-6xl mx-auto transition-colors duration-300">
           {/* Header */}
           <header className="relative px-4 py-6 sm:px-8">
             {/* Login/Register */}
@@ -63,9 +63,9 @@ const Home = () => {
             </nav>
 
             {/* Search & Color Picker */}
-            <div className="flex items-center mt-9 ms-24">
+            <div className="flex flex-wrap gap-2 items-center mt-9 sm:ms-24 justify-center sm:justify-start">
               <div
-                className="flex w-[700px] rounded-lg border border-red-600 overflow-hidden"
+                className="flex flex-grow min-w-[250px] sm:w-[500px] md:w-[600px] lg:w-[700px] rounded-lg border border-red-600 overflow-hidden"
                 style={{ height: "58px" }}
               >
                 <div className="flex items-center flex-grow px-4">
@@ -79,7 +79,7 @@ const Home = () => {
               </div>
 
               {/* Color Dropdown */}
-              <div className="relative ms-1" style={{ height: "58px" }}>
+              <div className="relative" style={{ height: "58px" }}>
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   className="flex items-center justify-center w-20 h-full bg-white dark:bg-gray-700 border border-red-700 rounded-lg cursor-pointer"

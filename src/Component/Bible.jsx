@@ -59,9 +59,9 @@ const BibleJeremiah30Page = () => {
     );
 
   return (
-    <div className="bg-gradient-to-br from-white to-gray-100 text-gray-900 min-h-screen flex font-montserrat">
+    <div className="bg-gray-100 text-gray-900 min-h-screen flex font-montserrat">
       <Sidebar />
-      <div className="flex flex-col md:flex-row flex-1 max-w-screen-xl mx-auto pl-[140px]">
+      <div className="flex flex-col md:flex-row flex-1 max-w-screen-xl mx-auto pl-[100px]">
         <div className="flex flex-col flex-1 p-6 bg-white rounded-xl shadow-md m-4">
           {/* Top Bar */}
           <div className="flex items-center space-x-3 mb-6">
