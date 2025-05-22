@@ -68,14 +68,14 @@ function Follow_requests() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex w-full h-full bg-white dark:bg-gray-900 transition-colors duration-300  overflow-hidden ">
+    <div className="flex w-full h-full bg-gray-100 dark:bg-gray-900 transition-colors duration-300  overflow-hidden ">
       {/* Large Sidebar with shadow and border */}
       <div>
         <Sidebar />
       </div>
 
       {/* Main content area */}
-      <div className="flex-1 flex  p-6 ml-32  gap-6 border shadow-lg rounded-lg w-[000px]">
+      <div className="flex-1 flex bg-white p-6 ml-32  gap-6 border shadow-lg rounded-lg w-[000px]">
         {/* Small Sidebar inside main content, with shadow and border */}
         <div className="mt-[210px]">
           <Sidebar_small />
